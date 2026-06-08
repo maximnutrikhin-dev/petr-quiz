@@ -9,41 +9,28 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Barlow',sans-serif;background:#050a07;color:#fff;min-height:100vh;overflow-x:hidden}
 button{cursor:pointer;font-family:inherit}
-img{display:block}
-
-/* Screens */
 .screen{display:none;min-height:100vh}
 .screen.active{display:flex;flex-direction:column}
-
-/* Utility */
 .bebas{font-family:'Bebas Neue',sans-serif}
 .barlow{font-family:'Barlow Condensed',sans-serif}
-
-/* Progress dots */
 .prog-dot{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,0.08)}
-
-/* Cards */
 .crest-card{background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all 0.18s}
 .crest-card:hover{background:rgba(255,255,255,0.08)}
 .crest-card.correct{background:rgba(0,212,170,0.1);border-color:#00d4aa}
 .crest-card.wrong{background:rgba(255,107,107,0.1);border-color:#ff6b6b}
-.crest-img{width:76px;height:76px;object-fit:contain;background:#fff;border-radius:6px;padding:2px}
-
+.crest-img{width:76px;height:76px;object-fit:contain;background:#fff;border-radius:6px;padding:4px}
+.flag-img{width:110px;height:74px;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,0.2)}
 .answer-btn{background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;text-align:left;width:100%;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;color:#fff;transition:all 0.18s;display:flex;align-items:center;justify-content:space-between}
 .answer-btn:hover{background:rgba(255,255,255,0.08)}
 .answer-btn.correct{background:rgba(0,212,170,0.1);border-color:#00d4aa;color:#00d4aa}
 .answer-btn.wrong{background:rgba(255,107,107,0.1);border-color:#ff6b6b}
 .answer-btn.eliminated{opacity:0.2;pointer-events:none}
-
-/* Player card */
 .player-card{display:flex;border-radius:14px;overflow:hidden;border:2px solid rgba(255,215,0,0.3);background:#111;margin-bottom:16px}
-.player-photo{width:120px;flex-shrink:0;object-fit:cover;object-position:top}
+.player-photo{width:120px;flex-shrink:0;object-fit:cover;object-position:top;height:160px}
 .player-hints{flex:1;padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
 .hint-box{background:rgba(255,255,255,0.05);border-radius:8px;padding:6px 8px}
 .hint-label{font-size:0.6rem;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;font-family:'Barlow Condensed',sans-serif}
 .hint-val{font-size:0.82rem;font-weight:700;font-family:'Barlow Condensed',sans-serif;line-height:1.2}
-
-/* Feedback box */
 .feedback{padding:14px 16px;border-radius:12px;margin-bottom:14px}
 .feedback.correct{background:rgba(0,212,170,0.09);border:1px solid rgba(0,212,170,0.3)}
 .feedback.wrong{background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.3)}
@@ -51,47 +38,35 @@ img{display:block}
 .feedback.correct .feedback-title{color:#00d4aa}
 .feedback.wrong .feedback-title{color:#ff6b6b}
 .feedback-fact{font-size:0.83rem;color:#cbd5e1;line-height:1.45}
-.new-card{margin-top:10px;padding:7px 12px;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700}
-
-/* Worlds screen cards */
+.new-card-badge{margin-top:10px;padding:7px 12px;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700}
 .world-card{border-radius:16px;padding:20px;cursor:pointer;transition:all 0.2s;margin-bottom:14px;border:1px solid transparent}
 .world-card:hover{transform:translateX(5px)}
-
-/* Main btn */
 .main-btn{font-family:'Bebas Neue',sans-serif;letter-spacing:0.06em;border-radius:10px;border:2px solid;padding:13px 28px;font-size:1.05rem;transition:all 0.15s}
 .main-btn:hover{transform:scale(1.03)}
-
-/* Home world icons */
 .world-icon{background:rgba(255,255,255,0.04);border-radius:10px;padding:12px 4px;cursor:pointer;text-align:center;transition:background 0.2s}
 .world-icon:hover{background:rgba(255,255,255,0.1)}
-
-/* Difficulty badge */
 .diff-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;margin-bottom:14px}
-
-/* Gallery cards */
 .gallery-card{border-radius:12px;padding:14px 10px;text-align:center}
+.loading-spinner{display:inline-block;animation:spin 1s linear infinite;font-size:1.2rem}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
 <!-- HOME -->
 <div id="screen-home" class="screen active" style="align-items:center;justify-content:center;padding:2rem 1rem;position:relative;overflow:hidden">
-  <svg style="position:fixed;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none">
-    <circle cx="50%" cy="50%" r="180" fill="none" stroke="#00d4aa" stroke-width="2"/>
-    <line x1="50%" y1="0" x2="50%" y2="100%" stroke="#00d4aa" stroke-width="1.5"/>
-    <rect x="8%" y="18%" width="84%" height="64%" fill="none" stroke="#00d4aa" stroke-width="1.5" rx="4"/>
-  </svg>
+  <svg style="position:fixed;inset:0;width:100%;height:100%;opacity:0.05;pointer-events:none"><circle cx="50%" cy="50%" r="180" fill="none" stroke="#00d4aa" stroke-width="2"/><line x1="50%" y1="0" x2="50%" y2="100%" stroke="#00d4aa" stroke-width="1.5"/><rect x="8%" y="18%" width="84%" height="64%" fill="none" stroke="#00d4aa" stroke-width="1.5" rx="4"/></svg>
   <div style="position:relative;z-index:1;text-align:center;max-width:520px;width:100%">
     <div style="display:flex;justify-content:flex-end;margin-bottom:1rem">
-      <button onclick="toggleLang()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:6px 14px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem" id="lang-btn">🇷🇺 RU</button>
+      <button onclick="toggleLang()" id="lang-btn" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:6px 14px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.85rem">🇷🇺 RU</button>
     </div>
     <div style="font-size:3.5rem;margin-bottom:4px">⚽</div>
-    <h1 class="bebas" style="font-size:clamp(3rem,11vw,5.5rem);letter-spacing:0.04em;line-height:0.9;background:linear-gradient(135deg,#00d4aa 0%,#ffd700 50%,#ff6b6b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent" data-en="PETR'S" data-ru="ИГРА">PETR'S</h1>
-    <h2 class="bebas" style="font-size:clamp(2rem,7vw,3.5rem);letter-spacing:0.08em;color:#ffd700;margin-bottom:6px" data-en="WORLD CUP QUIZ" data-ru="ПЕТРА">WORLD CUP QUIZ</h2>
-    <p class="barlow" style="color:#9ca3af;font-size:0.95rem;margin-bottom:28px" data-en="4 worlds · 20 questions · Collect all cards" data-ru="4 мира · 20 вопросов · Собери все карточки">4 worlds · 20 questions · Collect all cards</p>
+    <h1 class="bebas" style="font-size:clamp(3rem,11vw,5.5rem);letter-spacing:0.04em;line-height:0.9;background:linear-gradient(135deg,#00d4aa 0%,#ffd700 50%,#ff6b6b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent" id="home-title">PETR'S</h1>
+    <h2 class="bebas" id="home-subtitle" style="font-size:clamp(2rem,7vw,3.5rem);letter-spacing:0.08em;color:#ffd700;margin-bottom:6px">WORLD CUP QUIZ</h2>
+    <p class="barlow" id="home-desc" style="color:#9ca3af;font-size:0.95rem;margin-bottom:28px">4 worlds · 60 questions · Collect all cards</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:28px">
-      <button class="main-btn" onclick="showScreen('worlds')" style="background:#00d4aa;color:#000;border-color:#00d4aa">⚽ <span data-en="PLAY" data-ru="ИГРАТЬ">PLAY</span></button>
-      <button class="main-btn" onclick="showScreen('gallery')" style="background:rgba(255,215,0,0.1);color:#ffd700;border-color:#ffd700">📦 <span data-en="CARDS" data-ru="КАРТОЧКИ">CARDS</span> (<span id="home-card-count">0</span>/20)</button>
+      <button class="main-btn" onclick="showScreen('worlds')" style="background:#00d4aa;color:#000;border-color:#00d4aa">⚽ <span id="btn-play">PLAY</span></button>
+      <button class="main-btn" onclick="showScreen('gallery')" style="background:rgba(255,215,0,0.1);color:#ffd700;border-color:#ffd700">📦 <span id="btn-cards">CARDS</span> (<span id="home-card-count">0</span>/60)</button>
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px" id="home-worlds"></div>
   </div>
@@ -101,10 +76,10 @@ img{display:block}
 <div id="screen-worlds" class="screen" style="padding:1.5rem 1rem">
   <div style="max-width:520px;margin:0 auto;width:100%">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
-      <button onclick="showScreen('home')" style="background:none;border:none;color:#9ca3af;font-family:'Barlow Condensed',sans-serif;font-size:1rem">← <span data-en="Back" data-ru="Назад">Back</span></button>
+      <button onclick="showScreen('home')" style="background:none;border:none;color:#9ca3af;font-family:'Barlow Condensed',sans-serif;font-size:1rem">← <span id="back-worlds">Back</span></button>
       <button onclick="toggleLang()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:4px 10px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem" id="lang-btn-worlds">🇷🇺 RU</button>
     </div>
-    <h2 class="bebas" style="font-size:2.5rem;letter-spacing:0.05em;color:#ffd700;margin-bottom:18px" data-en="CHOOSE YOUR WORLD" data-ru="ВЫБЕРИ МИР">CHOOSE YOUR WORLD</h2>
+    <h2 class="bebas" id="worlds-title" style="font-size:2.5rem;letter-spacing:0.05em;color:#ffd700;margin-bottom:18px">CHOOSE YOUR WORLD</h2>
     <div id="worlds-list"></div>
   </div>
 </div>
@@ -113,11 +88,11 @@ img{display:block}
 <div id="screen-quiz" class="screen" style="padding:1.5rem 1rem">
   <div style="max-width:520px;margin:0 auto;width:100%">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
-      <button onclick="showScreen('worlds')" style="background:none;border:none;color:#9ca3af;font-family:'Barlow Condensed',sans-serif;font-size:0.9rem">← <span data-en="Worlds" data-ru="Миры">Worlds</span></button>
+      <button onclick="showScreen('worlds')" style="background:none;border:none;color:#9ca3af;font-family:'Barlow Condensed',sans-serif;font-size:0.9rem">← <span id="back-quiz">Worlds</span></button>
       <span class="bebas" style="font-size:1.15rem" id="quiz-world-title"></span>
       <button onclick="toggleLang()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:3px 8px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem" id="lang-btn-quiz">🇷🇺 RU</button>
     </div>
-    <div id="quiz-progress" style="display:flex;gap:5px;margin-bottom:12px"></div>
+    <div id="quiz-progress" style="display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap"></div>
     <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-family:'Barlow Condensed',sans-serif;font-size:0.88rem">
       <span style="color:#9ca3af" id="quiz-qnum"></span>
       <span style="font-weight:700" id="quiz-score"></span>
@@ -128,7 +103,7 @@ img{display:block}
     <div id="quiz-options"></div>
     <button id="ask-dad-btn" onclick="askDad()" style="width:100%;border-radius:8px;padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.88rem;margin-bottom:14px;background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.33);color:#fbbf24"></button>
     <div id="quiz-feedback"></div>
-    <button id="quiz-next-btn" onclick="nextQuestion()" style="display:none;width:100%;background:#00d4aa;color:#000;border:2px solid #00d4aa;border-radius:10px;padding:13px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:0.06em"></button>
+    <button id="quiz-next-btn" onclick="nextQuestion()" style="display:none;width:100%;border:2px solid;border-radius:10px;padding:13px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:0.06em;color:#000"></button>
   </div>
 </div>
 
@@ -139,9 +114,9 @@ img{display:block}
     <div class="bebas" id="result-score" style="font-size:5rem;color:#fff;line-height:1"></div>
     <div class="barlow" id="result-sub" style="color:#9ca3af;margin-bottom:32px"></div>
     <div style="display:flex;flex-direction:column;gap:12px">
-      <button class="main-btn" onclick="replayWorld()" id="result-replay" style="background:#00d4aa;color:#000;border-color:#00d4aa;width:100%"></button>
-      <button class="main-btn" onclick="showScreen('gallery')" style="background:rgba(255,215,0,0.1);color:#ffd700;border-color:#ffd700;width:100%">📦 <span data-en="MY CARDS" data-ru="МОИ КАРТОЧКИ">MY CARDS</span></button>
-      <button class="main-btn" onclick="showScreen('home')" style="background:rgba(107,114,128,0.1);color:#9ca3af;border-color:#6b7280;width:100%">🏠 <span data-en="HOME" data-ru="ГЛАВНАЯ">HOME</span></button>
+      <button class="main-btn" onclick="replayWorld()" id="result-replay" style="width:100%"></button>
+      <button class="main-btn" onclick="showScreen('gallery')" id="result-gallery" style="background:rgba(255,215,0,0.1);color:#ffd700;border-color:#ffd700;width:100%">📦 MY CARDS</button>
+      <button class="main-btn" onclick="showScreen('home')" id="result-home" style="background:rgba(107,114,128,0.1);color:#9ca3af;border-color:#6b7280;width:100%">🏠 HOME</button>
     </div>
   </div>
 </div>
@@ -150,10 +125,10 @@ img{display:block}
 <div id="screen-gallery" class="screen" style="padding:1.5rem 1rem">
   <div style="max-width:520px;margin:0 auto;width:100%">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
-      <button onclick="showScreen('home')" style="background:none;border:none;color:#9ca3af;font-family:'Barlow Condensed',sans-serif;font-size:1rem">← <span data-en="Back" data-ru="Назад">Back</span></button>
+      <button onclick="showScreen('home')" style="background:none;border:none;color:#9ca3af;font-family:'Barlow Condensed',sans-serif;font-size:1rem">← <span id="back-gallery">Back</span></button>
       <button onclick="toggleLang()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:#fff;padding:4px 10px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.75rem" id="lang-btn-gallery">🇷🇺 RU</button>
     </div>
-    <h2 class="bebas" style="font-size:2.3rem;color:#ffd700;margin-bottom:6px" data-en="CARD COLLECTION" data-ru="КОЛЛЕКЦИЯ">CARD COLLECTION</h2>
+    <h2 class="bebas" id="gallery-title" style="font-size:2.3rem;color:#ffd700;margin-bottom:6px">CARD COLLECTION</h2>
     <p class="barlow" id="gallery-count" style="color:#9ca3af;margin-bottom:18px;font-size:0.88rem"></p>
     <div style="display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap" id="gallery-filters"></div>
     <div id="gallery-grid"></div>
@@ -161,7 +136,55 @@ img{display:block}
 </div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
+// ── IMAGE SOURCES ─────────────────────────────────────────────────────────────
+// Club badges loaded dynamically from TheSportsDB API (browser-side fetch)
+// Flags from flagcdn.com — open CDN, no hotlink restrictions
+// Player photos from Wikimedia Commons — open CORS
+
+const TEAM_IDS = {
+  mancity:      "133613",
+  manutd:       "133612",
+  liverpool:    "133602",
+  chelsea:      "133610",
+  arsenal:      "133604",
+  barcelona:    "133739",
+  realmadrid:   "133741",
+  psg:          "133718",
+  juventus:     "133764",
+  bayernmunich: "133755",
+};
+
+// Will be populated on load
+const BADGE_URLS = {};
+
+async function loadBadges() {
+  const promises = Object.entries(TEAM_IDS).map(async ([key, id]) => {
+    try {
+      const r = await fetch(`https://www.thesportsdb.com/api/v1/json/123/lookupteam.php?id=${id}`);
+      const d = await r.json();
+      const t = d.teams?.[0];
+      const url = t?.strTeamBadge || t?.strBadge || '';
+      if (url) BADGE_URLS[key] = url + '/medium';
+    } catch {}
+  });
+  await Promise.all(promises);
+}
+
+const PLAYER_URLS = {
+  ronaldo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Cristiano_Ronaldo_in_2023.jpg/300px-Cristiano_Ronaldo_in_2023.jpg",
+  messi:   "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg/300px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg",
+  mbappe:  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Kylian_Mbapp%C3%A9_World_Cup_Trophy.jpg/300px-Kylian_Mbapp%C3%A9_World_Cup_Trophy.jpg",
+  haaland: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Erling_Haaland_2023_%28cropped-v2%29.jpg/300px-Erling_Haaland_2023_%28cropped-v2%29.jpg",
+  neymar:  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Neymar_jr_2018.jpg/300px-Neymar_jr_2018.jpg",
+  salah:   "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Mohamed_Salah_2018.jpg/300px-Mohamed_Salah_2018.jpg",
+  bellingham: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Jude_Bellingham_%2820_November_2023%29.jpg/300px-Jude_Bellingham_%2820_November_2023%29.jpg",
+  vinicius: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Vinicius_Junior_2019.jpg/300px-Vinicius_Junior_2019.jpg",
+};
+
+// flagcdn.com — confirmed open CDN, no hotlink restrictions
+function flagUrl(code) { return `https://flagcdn.com/w160/${code}.png`; }
+
+// ── GAME DATA ─────────────────────────────────────────────────────────────────
 const RARITY = {
   common:    {label:"Common",    labelRu:"Обычная",     color:"#9ca3af"},
   rare:      {label:"Rare",      labelRu:"Редкая",      color:"#60a5fa"},
@@ -172,216 +195,95 @@ const DC = {easy:"#00d4aa", medium:"#ffd700", hard:"#ff6b6b"};
 const DR = {easy:"Лёгкий", medium:"Средний", hard:"Сложный"};
 
 const WORLDS = [
-  {
-    id:"clubs", name:"Football Clubs", nameRu:"Футбольные Клубы", emoji:"🏆", color:"#00d4aa",
-    bg:"linear-gradient(160deg,#001a12 0%,#003d28 60%,#005533 100%)",
-    desc:"Find the right badge for each club", descRu:"Найди правильный герб клуба",
-    questions:[
-      {id:"c1",diff:"easy",
-       en:"Which badge belongs to Manchester City?", ru:"Какой герб принадлежит Манчестер Сити?",
-       type:"crest",
-       opts:[
-         {key:"mancity",   label:"Manchester City", correct:true},
-         {key:"chelsea",   label:"Chelsea",         correct:false},
-         {key:"liverpool", label:"Liverpool",       correct:false},
-         {key:"bayernmunich",label:"Bayern Munich", correct:false},
-       ],
-       cardName:"Man City", cardEmoji:"🩵", rarity:"rare",
-       fact:"Man City were founded in 1880 and play at the Etihad Stadium.",
-       factRu:"Манчестер Сити основан в 1880 году и играет на стадионе Этихад."},
-      {id:"c2",diff:"easy",
-       en:"Which badge belongs to Real Madrid?", ru:"Какой герб принадлежит Реал Мадриду?",
-       type:"crest",
-       opts:[
-         {key:"realmadrid", label:"Real Madrid", correct:true},
-         {key:"barcelona",  label:"Barcelona",   correct:false},
-         {key:"juventus",   label:"Juventus",    correct:false},
-         {key:"psg",        label:"PSG",         correct:false},
-       ],
-       cardName:"Real Madrid", cardEmoji:"⚪", rarity:"legendary",
-       fact:"Real Madrid have won the Champions League a record 15 times.",
-       factRu:"Реал Мадрид выиграл Лигу чемпионов рекордные 15 раз."},
-      {id:"c3",diff:"medium",
-       en:"Which badge belongs to FC Barcelona?", ru:"Какой герб принадлежит ФК Барселона?",
-       type:"crest",
-       opts:[
-         {key:"barcelona",  label:"Barcelona",   correct:true},
-         {key:"realmadrid", label:"Real Madrid",  correct:false},
-         {key:"psg",        label:"PSG",          correct:false},
-         {key:"liverpool",  label:"Liverpool",    correct:false},
-       ],
-       cardName:"Barcelona", cardEmoji:"🔵🔴", rarity:"legendary",
-       fact:"Barcelona's colours 'blaugrana' have been worn since 1899.",
-       factRu:"Цвета «блауграна» Барселона носит с 1899 года."},
-      {id:"c4",diff:"medium",
-       en:"Which badge belongs to Liverpool FC?", ru:"Какой герб принадлежит ФК Ливерпуль?",
-       type:"crest",
-       opts:[
-         {key:"liverpool",   label:"Liverpool",       correct:true},
-         {key:"mancity",     label:"Manchester City",  correct:false},
-         {key:"chelsea",     label:"Chelsea",          correct:false},
-         {key:"bayernmunich",label:"Bayern Munich",    correct:false},
-       ],
-       cardName:"Liverpool", cardEmoji:"❤️‍🔥", rarity:"rare",
-       fact:"Liverpool's anthem 'You'll Never Walk Alone' has been sung since 1963.",
-       factRu:"«You'll Never Walk Alone» поют на каждом матче с 1963 года."},
-      {id:"c5",diff:"hard",
-       en:"Which badge belongs to Juventus FC?", ru:"Какой герб принадлежит ФК Ювентус?",
-       type:"crest",
-       opts:[
-         {key:"juventus",    label:"Juventus",     correct:true},
-         {key:"psg",         label:"PSG",          correct:false},
-         {key:"bayernmunich",label:"Bayern Munich", correct:false},
-         {key:"chelsea",     label:"Chelsea",       correct:false},
-       ],
-       cardName:"Juventus", cardEmoji:"⚫⚪", rarity:"epic",
-       fact:"Juventus redesigned their badge in 2017 — one of football's most minimalist.",
-       factRu:"В 2017 году Ювентус обновил герб — один из самых минималистичных."},
-    ]
-  },
-  {
-    id:"players", name:"Football Stars", nameRu:"Звёзды Футбола", emoji:"⭐", color:"#ffd700",
-    bg:"linear-gradient(160deg,#1a1200 0%,#3d2e00 60%,#4d3a00 100%)",
-    desc:"Who is this footballer?", descRu:"Кто этот футболист?",
-    questions:[
-      {id:"p1",diff:"easy",
-       en:"Who is this footballer? Wears #7, plays for Portugal, 900+ career goals.",
-       ru:"Кто этот футболист? №7, Португалия, 900+ голов в карьере.",
-       type:"player", playerKey:"ronaldo",
-       hint:{Flag:"🇵🇹 Portugal", Club:"Al-Nassr", Number:"#7", Goals:"900+"},
-       opts:[
-         {en:"Cristiano Ronaldo",ru:"Криштиану Роналду",correct:true},
-         {en:"Lionel Messi",     ru:"Лионель Месси",    correct:false},
-         {en:"Neymar Jr.",       ru:"Неймар",           correct:false},
-         {en:"Kylian Mbappé",    ru:"Килиан Мбаппе",   correct:false},
-       ],
-       cardName:"Ronaldo", cardEmoji:"🇵🇹", rarity:"legendary",
-       fact:"Ronaldo has scored 900+ career goals — the most in football history.",
-       factRu:"Роналду забил 900+ голов — больше, чем любой другой игрок в истории."},
-      {id:"p2",diff:"easy",
-       en:"Who is this footballer? Argentine, #10, won the 2022 World Cup.",
-       ru:"Кто этот футболист? Аргентинец, №10, Кубок мира 2022.",
-       type:"player", playerKey:"messi",
-       hint:{Flag:"🇦🇷 Argentina", Club:"Inter Miami", Number:"#10", Awards:"8× Ballon d'Or"},
-       opts:[
-         {en:"Lionel Messi",      ru:"Лионель Месси",     correct:true},
-         {en:"Cristiano Ronaldo", ru:"Криштиану Роналду",  correct:false},
-         {en:"Paulo Dybala",      ru:"Пауло Дибала",       correct:false},
-         {en:"Lautaro Martínez",  ru:"Лаутаро Мартинес",  correct:false},
-       ],
-       cardName:"Messi", cardEmoji:"🇦🇷", rarity:"legendary",
-       fact:"Messi has won the Ballon d'Or a record 8 times.",
-       factRu:"Месси выиграл «Золотой мяч» рекордные 8 раз."},
-      {id:"p3",diff:"medium",
-       en:"Who is this footballer? French, hat-trick in the 2022 World Cup Final.",
-       ru:"Кто этот футболист? Француз, хет-трик в финале Кубка мира 2022.",
-       type:"player", playerKey:"mbappe",
-       hint:{Flag:"🇫🇷 France", Club:"Real Madrid", Number:"#10", Speed:"38 km/h"},
-       opts:[
-         {en:"Kylian Mbappé",     ru:"Килиан Мбаппе",     correct:true},
-         {en:"Antoine Griezmann", ru:"Антуан Гризманн",    correct:false},
-         {en:"Karim Benzema",     ru:"Карим Бензема",      correct:false},
-         {en:"Ousmane Dembélé",   ru:"Усман Дембеле",      correct:false},
-       ],
-       cardName:"Mbappé", cardEmoji:"🇫🇷", rarity:"epic",
-       fact:"Mbappé was born in 1998 — the same year France first won the World Cup!",
-       factRu:"Мбаппе родился в 1998 году — тогда же Франция впервые выиграла Кубок мира!"},
-      {id:"p4",diff:"medium",
-       en:"Who is this footballer? Norwegian, 1.94m, Man City #9.",
-       ru:"Кто этот футболист? Норвежец, 1,94м, Ман Сити №9.",
-       type:"player", playerKey:"haaland",
-       hint:{Flag:"🇳🇴 Norway", Club:"Man City", Number:"#9", Goals:"52 in one season!"},
-       opts:[
-         {en:"Erling Haaland",  ru:"Эрлинг Холанд",    correct:true},
-         {en:"Martin Ødegaard", ru:"Мартин Эдегор",    correct:false},
-         {en:"Harry Kane",      ru:"Гарри Кейн",       correct:false},
-         {en:"Victor Osimhen",  ru:"Виктор Осимхен",   correct:false},
-       ],
-       cardName:"Haaland", cardEmoji:"🇳🇴", rarity:"legendary",
-       fact:"Haaland scored 52 goals in his first Man City season — a world record.",
-       factRu:"Холанд забил 52 гола в первом сезоне за Ман Сити — мировой рекорд."},
-      {id:"p5",diff:"hard",
-       en:"Who is this footballer? Brazilian, #10, famous dribbler, 79 goals for Brazil.",
-       ru:"Кто этот футболист? Бразилец, №10, дриблинг, 79 голов за сборную.",
-       type:"player", playerKey:"neymar",
-       hint:{Flag:"🇧🇷 Brazil", Club:"Al-Hilal", Number:"#10", Goals:"79 for Brazil"},
-       opts:[
-         {en:"Neymar Jr.",   ru:"Неймар",          correct:true},
-         {en:"Vinicius Jr.", ru:"Винисиус Жуниор", correct:false},
-         {en:"Rodrygo",      ru:"Родриго",          correct:false},
-         {en:"Richarlison",  ru:"Ришарлисон",       correct:false},
-       ],
-       cardName:"Neymar Jr.", cardEmoji:"🇧🇷", rarity:"epic",
-       fact:"Neymar is Brazil's all-time top scorer with 79 international goals.",
-       factRu:"Неймар — лучший бомбардир сборной Бразилии с 79 голами."},
-    ]
-  },
-  {
-    id:"culture", name:"Culture & Flags", nameRu:"Культура и Флаги", emoji:"🎭", color:"#ff6b6b",
-    bg:"linear-gradient(160deg,#1a0000 0%,#3d0f0f 60%,#550a0a 100%)",
-    desc:"Traditions & culture around the world", descRu:"Традиции и культура мира",
-    questions:[
-      {id:"f1",diff:"easy", en:"🇯🇵 Japan — What is the ancient art of folding paper into shapes?", ru:"🇯🇵 Япония — Как называется древнее искусство складывания бумаги?",
-       type:"text", opts:[{en:"Origami",ru:"Оригами",correct:true},{en:"Ikebana",ru:"Икебана",correct:false},{en:"Kabuki",ru:"Кабуки",correct:false},{en:"Bonsai",ru:"Бонсай",correct:false}],
-       cardName:"Japan 🗾", cardEmoji:"🇯🇵", rarity:"common", fact:"'Origami' = fold + paper in Japanese. A crane needs ~60 folds!", factRu:"«Оригами» = складывать + бумага. Журавль — ~60 сгибов!"},
-      {id:"f2",diff:"easy", en:"🇧🇷 Brazil — What is the world-famous annual carnival in Rio called?", ru:"🇧🇷 Бразилия — Как называется знаменитый карнавал в Рио?",
-       type:"text", opts:[{en:"Rio Carnival",ru:"Карнавал в Рио",correct:true},{en:"Venice Carnival",ru:"Венецианский карнавал",correct:false},{en:"Notting Hill",ru:"Ноттинг Хилл",correct:false},{en:"Mardi Gras",ru:"Марди Гра",correct:false}],
-       cardName:"Brazil 🎉", cardEmoji:"🇧🇷", rarity:"rare", fact:"~2 million people dance in Rio Carnival streets every day!", factRu:"~2 миллиона человек танцуют на улицах Рио каждый день!"},
-      {id:"f3",diff:"medium", en:"🇮🇳 India — Emperor Shah Jahan built the Taj Mahal as a tomb for whom?", ru:"🇮🇳 Индия — Для кого Шах-Джахан построил Тадж-Махал?",
-       type:"text", opts:[{en:"His wife Mumtaz Mahal",ru:"Его жены Мумтаз-Махал",correct:true},{en:"His father",ru:"Своего отца",correct:false},{en:"Himself",ru:"Себя самого",correct:false},{en:"The god Shiva",ru:"Бога Шивы",correct:false}],
-       cardName:"Taj Mahal 🕌", cardEmoji:"🇮🇳", rarity:"epic", fact:"20,000 workers built the Taj Mahal over 22 years from white marble.", factRu:"20 000 рабочих строили Тадж-Махал 22 года из белого мрамора."},
-      {id:"f4",diff:"medium", en:"🇪🇸 Spain — What is the passionate Spanish dance with stamping feet?", ru:"🇪🇸 Испания — Как называется испанский танец с топотом ног?",
-       type:"text", opts:[{en:"Flamenco",ru:"Фламенко",correct:true},{en:"Tango",ru:"Танго",correct:false},{en:"Salsa",ru:"Сальса",correct:false},{en:"Bolero",ru:"Болеро",correct:false}],
-       cardName:"España 💃", cardEmoji:"🇪🇸", rarity:"rare", fact:"Flamenco became UNESCO world heritage in 2010.", factRu:"Фламенко стало наследием ЮНЕСКО в 2010 году."},
-      {id:"f5",diff:"hard", en:"🇨🇳 China — What is China's biggest festival based on the lunar calendar?", ru:"🇨🇳 Китай — Как называется главный праздник Китая по лунному календарю?",
-       type:"text", opts:[{en:"Spring Festival (Chūnjié)",ru:"Праздник весны (Чунь Цзе)",correct:true},{en:"Dragon Boat Festival",ru:"Праздник лодок-дракона",correct:false},{en:"Mid-Autumn Festival",ru:"Праздник середины осени",correct:false},{en:"Lantern Festival",ru:"Праздник фонарей",correct:false}],
-       cardName:"China 🐉", cardEmoji:"🇨🇳", rarity:"epic", fact:"Chinese New Year lasts 15 days — fireworks, red envelopes, dragon parades!", factRu:"Китайский Новый год — 15 дней: фейерверки, красные конверты, драконы!"},
-    ]
-  },
-  {
-    id:"geography", name:"World Capitals", nameRu:"Столицы Мира", emoji:"🌍", color:"#818cf8",
-    bg:"linear-gradient(160deg,#0d0020 0%,#1e0050 60%,#250060 100%)",
-    desc:"Countries, capitals & geography", descRu:"Страны, столицы и география",
-    questions:[
-      {id:"g1",diff:"easy", en:"What is the capital city of France?", ru:"Какая столица Франции?",
-       type:"text", opts:[{en:"Paris",ru:"Париж",correct:true},{en:"Lyon",ru:"Лион",correct:false},{en:"Marseille",ru:"Марсель",correct:false},{en:"Bordeaux",ru:"Бордо",correct:false}],
-       cardName:"Paris 🗼", cardEmoji:"🇫🇷", rarity:"common", fact:"Paris is 'The City of Light'. The Eiffel Tower is 330m tall, built in 1889.", factRu:"Париж — «Город света». Эйфелева башня 330м, построена в 1889 году."},
-      {id:"g2",diff:"easy", en:"Which is the largest country in the world by land area?", ru:"Какая страна самая большая по площади?",
-       type:"text", opts:[{en:"Russia",ru:"Россия",correct:true},{en:"Canada",ru:"Канада",correct:false},{en:"China",ru:"Китай",correct:false},{en:"USA",ru:"США",correct:false}],
-       cardName:"Russia 🌐", cardEmoji:"🇷🇺", rarity:"common", fact:"Russia spans 11 time zones — from Europe to the Pacific Ocean!", factRu:"Россия охватывает 11 часовых поясов — от Европы до Тихого океана!"},
-      {id:"g3",diff:"medium", en:"What is the capital of Australia? (NOT Sydney!)", ru:"Какая столица Австралии? (НЕ Сидней!)",
-       type:"text", opts:[{en:"Canberra",ru:"Канберра",correct:true},{en:"Sydney",ru:"Сидней",correct:false},{en:"Melbourne",ru:"Мельбурн",correct:false},{en:"Brisbane",ru:"Брисбен",correct:false}],
-       cardName:"Australia 🦘", cardEmoji:"🇦🇺", rarity:"rare", fact:"Canberra was built as capital because Sydney and Melbourne both wanted to be it!", factRu:"Канберра построена потому что Сидней и Мельбурн оба хотели стать столицей!"},
-      {id:"g4",diff:"medium", en:"Which is the longest river in the world?", ru:"Какая самая длинная река в мире?",
-       type:"text", opts:[{en:"The Nile (Africa)",ru:"Нил (Африка)",correct:true},{en:"Amazon (S.America)",ru:"Амазонка (Юж.Америка)",correct:false},{en:"Yangtze (China)",ru:"Янцзы (Китай)",correct:false},{en:"Mississippi (USA)",ru:"Миссисипи (США)",correct:false}],
-       cardName:"The Nile 🌊", cardEmoji:"🇪🇬", rarity:"epic", fact:"The Nile is 6,650 km long and flows through 11 African countries.", factRu:"Нил — 6 650 км, протекает через 11 африканских стран."},
-      {id:"g5",diff:"hard", en:"What is the capital of Brazil? (NOT Rio de Janeiro!)", ru:"Какая столица Бразилии? (НЕ Рио-де-Жанейро!)",
-       type:"text", opts:[{en:"Brasília",ru:"Бразилиа",correct:true},{en:"Rio de Janeiro",ru:"Рио-де-Жанейро",correct:false},{en:"São Paulo",ru:"Сан-Паулу",correct:false},{en:"Salvador",ru:"Салвадор",correct:false}],
-       cardName:"Brasília 🏛️", cardEmoji:"🇧🇷", rarity:"rare", fact:"Brasília was purpose-built as Brazil's capital in just 41 months, opening 1960.", factRu:"Бразилиа построена за 41 месяц и открылась в 1960 году."},
-    ]
-  },
+{
+  id:"clubs", name:"Football Clubs", nameRu:"Футбольные Клубы", emoji:"🏆", color:"#00d4aa",
+  bg:"linear-gradient(160deg,#001a12 0%,#003d28 60%,#005533 100%)",
+  desc:"Find the right club badge", descRu:"Найди правильный герб клуба",
+  questions:[
+    {id:"c1",diff:"easy",en:"Which badge belongs to Manchester City?",ru:"Какой герб принадлежит Манчестер Сити?",type:"crest",opts:[{key:"mancity",label:"Man City",correct:true},{key:"chelsea",label:"Chelsea",correct:false},{key:"liverpool",label:"Liverpool",correct:false},{key:"bayernmunich",label:"Bayern",correct:false}],cardName:"Man City",cardEmoji:"🩵",rarity:"rare",fact:"Man City play at the Etihad Stadium, which holds 53,400 fans.",factRu:"Ман Сити играет на стадионе Этихад, вмещающем 53 400 болельщиков."},
+    {id:"c2",diff:"easy",en:"Which badge belongs to Real Madrid?",ru:"Какой герб принадлежит Реал Мадриду?",type:"crest",opts:[{key:"realmadrid",label:"Real Madrid",correct:true},{key:"barcelona",label:"Barcelona",correct:false},{key:"juventus",label:"Juventus",correct:false},{key:"psg",label:"PSG",correct:false}],cardName:"Real Madrid",cardEmoji:"⚪",rarity:"legendary",fact:"Real Madrid have won the Champions League a record 15 times.",factRu:"Реал Мадрид выиграл Лигу чемпионов рекордные 15 раз."},
+    {id:"c3",diff:"medium",en:"Which badge belongs to FC Barcelona?",ru:"Какой герб принадлежит ФК Барселона?",type:"crest",opts:[{key:"barcelona",label:"Barcelona",correct:true},{key:"realmadrid",label:"Real Madrid",correct:false},{key:"psg",label:"PSG",correct:false},{key:"liverpool",label:"Liverpool",correct:false}],cardName:"Barcelona",cardEmoji:"🔵🔴",rarity:"legendary",fact:"Barcelona's colours 'blaugrana' (blue & red) have been used since 1899.",factRu:"Цвета Барселоны «блауграна» используются с 1899 года."},
+    {id:"c4",diff:"medium",en:"Which badge belongs to Liverpool FC?",ru:"Какой герб принадлежит ФК Ливерпуль?",type:"crest",opts:[{key:"liverpool",label:"Liverpool",correct:true},{key:"mancity",label:"Man City",correct:false},{key:"chelsea",label:"Chelsea",correct:false},{key:"bayernmunich",label:"Bayern",correct:false}],cardName:"Liverpool",cardEmoji:"❤️‍🔥",rarity:"rare",fact:"Liverpool's anthem 'You'll Never Walk Alone' has been sung since 1963.",factRu:"Гимн «You'll Never Walk Alone» поют на каждом матче с 1963 года."},
+    {id:"c5",diff:"hard",en:"Which badge belongs to Juventus FC?",ru:"Какой герб принадлежит ФК Ювентус?",type:"crest",opts:[{key:"juventus",label:"Juventus",correct:true},{key:"psg",label:"PSG",correct:false},{key:"bayernmunich",label:"Bayern",correct:false},{key:"chelsea",label:"Chelsea",correct:false}],cardName:"Juventus",cardEmoji:"⚫⚪",rarity:"epic",fact:"Juventus redesigned their badge in 2017 — it became one of football's most minimalist.",factRu:"В 2017 году Ювентус обновил герб — он стал одним из самых минималистичных в футболе."},
+    {id:"c6",diff:"easy",en:"Which badge belongs to Manchester United?",ru:"Какой герб принадлежит Манчестер Юнайтед?",type:"crest",opts:[{key:"manutd",label:"Man United",correct:true},{key:"mancity",label:"Man City",correct:false},{key:"arsenal",label:"Arsenal",correct:false},{key:"liverpool",label:"Liverpool",correct:false}],cardName:"Man United",cardEmoji:"🔴",rarity:"rare",fact:"Manchester United have won the English league title a record 20 times.",factRu:"Манчестер Юнайтед выигрывал чемпионат Англии рекордные 20 раз."},
+    {id:"c7",diff:"easy",en:"Which badge belongs to Arsenal FC?",ru:"Какой герб принадлежит ФК Арсенал?",type:"crest",opts:[{key:"arsenal",label:"Arsenal",correct:true},{key:"chelsea",label:"Chelsea",correct:false},{key:"liverpool",label:"Liverpool",correct:false},{key:"manutd",label:"Man United",correct:false}],cardName:"Arsenal",cardEmoji:"🔴",rarity:"rare",fact:"Arsenal's nickname is 'The Gunners' — their badge features a cannon.",factRu:"Прозвище Арсенала — «Канониры», на гербе изображена пушка."},
+    {id:"c8",diff:"medium",en:"Which badge belongs to Chelsea FC?",ru:"Какой герб принадлежит ФК Челси?",type:"crest",opts:[{key:"chelsea",label:"Chelsea",correct:true},{key:"arsenal",label:"Arsenal",correct:false},{key:"manutd",label:"Man United",correct:false},{key:"psg",label:"PSG",correct:false}],cardName:"Chelsea",cardEmoji:"💙",rarity:"common",fact:"Chelsea FC was founded in 1905 and plays at Stamford Bridge in London.",factRu:"ФК Челси основан в 1905 году и играет на стадионе Стэмфорд Бридж."},
+    {id:"c9",diff:"medium",en:"Which badge belongs to PSG?",ru:"Какой герб принадлежит ПСЖ?",type:"crest",opts:[{key:"psg",label:"PSG",correct:true},{key:"juventus",label:"Juventus",correct:false},{key:"realmadrid",label:"Real Madrid",correct:false},{key:"barcelona",label:"Barcelona",correct:false}],cardName:"PSG",cardEmoji:"🗼",rarity:"epic",fact:"PSG was founded in 1970. Their badge features the Eiffel Tower.",factRu:"ПСЖ основан в 1970 году. На гербе изображена Эйфелева башня."},
+    {id:"c10",diff:"hard",en:"Which badge belongs to Bayern Munich?",ru:"Какой герб принадлежит Баварии Мюнхен?",type:"crest",opts:[{key:"bayernmunich",label:"Bayern Munich",correct:true},{key:"realmadrid",label:"Real Madrid",correct:false},{key:"juventus",label:"Juventus",correct:false},{key:"barcelona",label:"Barcelona",correct:false}],cardName:"Bayern Munich",cardEmoji:"❤️",rarity:"epic",fact:"Bayern Munich's badge features the blue and white diamond pattern of the Bavarian flag.",factRu:"На гербе Баварии изображён сине-белый ромбовидный узор баварского флага."},
+    {id:"c11",diff:"easy",en:"How many times have Real Madrid won the Champions League?",ru:"Сколько раз Реал Мадрид выигрывал Лигу чемпионов?",type:"text",opts:[{en:"15",ru:"15",correct:true},{en:"10",ru:"10",correct:false},{en:"12",ru:"12",correct:false},{en:"8",ru:"8",correct:false}],cardName:"UCL Kings",cardEmoji:"🏆",rarity:"legendary",fact:"Real Madrid's 15 Champions League titles is more than any other club in history.",factRu:"15 побед Реала в Лиге чемпионов — абсолютный рекорд в истории футбола."},
+    {id:"c12",diff:"medium",en:"Which city is FC Barcelona based in?",ru:"В каком городе базируется ФК Барселона?",type:"text",opts:[{en:"Barcelona, Spain",ru:"Барселона, Испания",correct:true},{en:"Madrid, Spain",ru:"Мадрид, Испания",correct:false},{en:"Valencia, Spain",ru:"Валенсия, Испания",correct:false},{en:"Seville, Spain",ru:"Севилья, Испания",correct:false}],cardName:"Camp Nou",cardEmoji:"🏟️",rarity:"common",fact:"Barcelona's stadium Camp Nou is the largest in Europe with 99,354 capacity.",factRu:"Стадион Камп Ноу — крупнейший в Европе, вмещает 99 354 зрителей."},
+    {id:"c13",diff:"medium",en:"What is Liverpool's famous anthem sung before every match?",ru:"Какой знаменитый гимн поют перед каждым матчем Ливерпуля?",type:"text",opts:[{en:"You'll Never Walk Alone",ru:"You'll Never Walk Alone",correct:true},{en:"We Are the Champions",ru:"We Are the Champions",correct:false},{en:"Fields of Anfield Road",ru:"Fields of Anfield Road",correct:false},{en:"When the Saints Go Marching",ru:"When the Saints Go Marching",correct:false}],cardName:"YNWA",cardEmoji:"🎵",rarity:"rare",fact:"'You'll Never Walk Alone' was originally a song from the 1945 musical Carousel.",factRu:"«You'll Never Walk Alone» — песня из мюзикла «Карусель» 1945 года."},
+    {id:"c14",diff:"hard",en:"Which club is nicknamed 'The Gunners'?",ru:"Какой клуб носит прозвище «Канониры»?",type:"text",opts:[{en:"Arsenal",ru:"Арсенал",correct:true},{en:"Chelsea",ru:"Челси",correct:false},{en:"Tottenham",ru:"Тоттенхэм",correct:false},{en:"West Ham",ru:"Вест Хэм",correct:false}],cardName:"The Gunners",cardEmoji:"💥",rarity:"common",fact:"Arsenal were founded in 1886 by workers at the Royal Arsenal munitions factory in Woolwich.",factRu:"Арсенал основан в 1886 году рабочими Королевского арсенала в Вулвиче."},
+    {id:"c15",diff:"hard",en:"In what year was Manchester United founded?",ru:"В каком году был основан Манчестер Юнайтед?",type:"text",opts:[{en:"1878",ru:"1878",correct:true},{en:"1902",ru:"1902",correct:false},{en:"1888",ru:"1888",correct:false},{en:"1895",ru:"1895",correct:false}],cardName:"Man Utd History",cardEmoji:"📅",rarity:"common",fact:"Man United were founded in 1878 as Newton Heath LYR Football Club.",factRu:"Ман Юнайтед основан в 1878 году под названием «Ньютон Хит ЛЙР»."},
+  ]
+},
+{
+  id:"players", name:"Football Stars", nameRu:"Звёзды Футбола", emoji:"⭐", color:"#ffd700",
+  bg:"linear-gradient(160deg,#1a1200 0%,#3d2e00 60%,#4d3a00 100%)",
+  desc:"Who is this footballer?", descRu:"Кто этот футболист?",
+  questions:[
+    {id:"p1",diff:"easy",en:"Who is this footballer? Wears #7, plays for Portugal, 900+ career goals.",ru:"Кто этот футболист? №7, Португалия, 900+ голов.",type:"player",playerKey:"ronaldo",hint:{Flag:"🇵🇹 Portugal",Club:"Al-Nassr",Number:"#7",Goals:"900+"},opts:[{en:"Cristiano Ronaldo",ru:"Криштиану Роналду",correct:true},{en:"Lionel Messi",ru:"Лионель Месси",correct:false},{en:"Neymar Jr.",ru:"Неймар",correct:false},{en:"Kylian Mbappé",ru:"Килиан Мбаппе",correct:false}],cardName:"Ronaldo",cardEmoji:"🇵🇹",rarity:"legendary",fact:"Ronaldo has scored 900+ career goals — the most in football history.",factRu:"Роналду забил 900+ голов — больше, чем любой другой игрок в истории."},
+    {id:"p2",diff:"easy",en:"Who is this footballer? Argentine, #10, won the 2022 World Cup.",ru:"Кто этот футболист? Аргентинец, №10, Кубок мира 2022.",type:"player",playerKey:"messi",hint:{Flag:"🇦🇷 Argentina",Club:"Inter Miami",Number:"#10",Awards:"8× Ballon d'Or"},opts:[{en:"Lionel Messi",ru:"Лионель Месси",correct:true},{en:"Cristiano Ronaldo",ru:"Криштиану Роналду",correct:false},{en:"Paulo Dybala",ru:"Пауло Дибала",correct:false},{en:"Lautaro Martínez",ru:"Лаутаро Мартинес",correct:false}],cardName:"Messi",cardEmoji:"🇦🇷",rarity:"legendary",fact:"Messi has won the Ballon d'Or a record 8 times.",factRu:"Месси выиграл «Золотой мяч» рекордные 8 раз."},
+    {id:"p3",diff:"medium",en:"Who is this footballer? French, hat-trick in the 2022 World Cup Final.",ru:"Кто этот футболист? Француз, хет-трик в финале ЧМ 2022.",type:"player",playerKey:"mbappe",hint:{Flag:"🇫🇷 France",Club:"Real Madrid",Number:"#10",Speed:"38 km/h"},opts:[{en:"Kylian Mbappé",ru:"Килиан Мбаппе",correct:true},{en:"Antoine Griezmann",ru:"Антуан Гризманн",correct:false},{en:"Karim Benzema",ru:"Карим Бензема",correct:false},{en:"Ousmane Dembélé",ru:"Усман Дембеле",correct:false}],cardName:"Mbappé",cardEmoji:"🇫🇷",rarity:"epic",fact:"Mbappé was born in 1998 — the same year France first won the World Cup!",factRu:"Мбаппе родился в 1998 году — тогда же Франция впервые выиграла Кубок мира!"},
+    {id:"p4",diff:"medium",en:"Who is this footballer? Norwegian, 1.94m, Man City #9.",ru:"Кто этот футболист? Норвежец, 1,94м, Ман Сити №9.",type:"player",playerKey:"haaland",hint:{Flag:"🇳🇴 Norway",Club:"Man City",Number:"#9",Goals:"52 in one season!"},opts:[{en:"Erling Haaland",ru:"Эрлинг Холанд",correct:true},{en:"Martin Ødegaard",ru:"Мартин Эдегор",correct:false},{en:"Harry Kane",ru:"Гарри Кейн",correct:false},{en:"Victor Osimhen",ru:"Виктор Осимхен",correct:false}],cardName:"Haaland",cardEmoji:"🇳🇴",rarity:"legendary",fact:"Haaland scored 52 goals in his first Man City season — a world record.",factRu:"Холанд забил 52 гола в первом сезоне за Ман Сити — мировой рекорд."},
+    {id:"p5",diff:"hard",en:"Who is this footballer? Brazilian, #10, famous dribbler, 79 goals for Brazil.",ru:"Кто этот футболист? Бразилец, №10, дриблинг, 79 голов за сборную.",type:"player",playerKey:"neymar",hint:{Flag:"🇧🇷 Brazil",Club:"Al-Hilal",Number:"#10",Goals:"79 for Brazil"},opts:[{en:"Neymar Jr.",ru:"Неймар",correct:true},{en:"Vinicius Jr.",ru:"Винисиус Жуниор",correct:false},{en:"Rodrygo",ru:"Родриго",correct:false},{en:"Richarlison",ru:"Ришарлисон",correct:false}],cardName:"Neymar Jr.",cardEmoji:"🇧🇷",rarity:"epic",fact:"Neymar is Brazil's all-time top scorer with 79 international goals.",factRu:"Неймар — лучший бомбардир сборной Бразилии с 79 голами."},
+    {id:"p6",diff:"medium",en:"Who is this footballer? Egyptian, plays for Liverpool, nicknamed 'The Egyptian King'.",ru:"Кто этот футболист? Египтянин, играет за Ливерпуль, прозван «Египетским королём».",type:"player",playerKey:"salah",hint:{Flag:"🇪🇬 Egypt",Club:"Liverpool",Number:"#11",Goals:"200+ for Liverpool"},opts:[{en:"Mohamed Salah",ru:"Мохамед Салах",correct:true},{en:"Sadio Mané",ru:"Садио Мане",correct:false},{en:"Roberto Firmino",ru:"Роберто Фирмино",correct:false},{en:"Diogo Jota",ru:"Диогу Жота",correct:false}],cardName:"Salah",cardEmoji:"🇪🇬",rarity:"epic",fact:"Salah became Liverpool's all-time top scorer surpassing Roger Hunt's 245 goal record.",factRu:"Салах стал лучшим бомбардиром Ливерпуля, превзойдя рекорд Роджера Ханта в 245 голов."},
+    {id:"p7",diff:"hard",en:"Who is this young English midfielder who plays for Real Madrid?",ru:"Кто этот молодой английский полузащитник, играющий за Реал Мадрид?",type:"player",playerKey:"bellingham",hint:{Flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿 England",Club:"Real Madrid",Number:"#5",Born:"2003"},opts:[{en:"Jude Bellingham",ru:"Джуд Беллингем",correct:true},{en:"Phil Foden",ru:"Фил Фоден",correct:false},{en:"Bukayo Saka",ru:"Букайо Сака",correct:false},{en:"Mason Mount",ru:"Мейсон Маунт",correct:false}],cardName:"Bellingham",cardEmoji:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",rarity:"legendary",fact:"Bellingham is one of the most expensive players ever — sold to Real Madrid for €103 million.",factRu:"Беллингем — один из самых дорогих игроков в истории, куплен Реалом за €103 млн."},
+    {id:"p8",diff:"hard",en:"Who is this Brazilian winger who plays for Real Madrid and is famous for his pace?",ru:"Кто этот бразильский вингер Реал Мадрида, знаменитый своей скоростью?",type:"player",playerKey:"vinicius",hint:{Flag:"🇧🇷 Brazil",Club:"Real Madrid",Number:"#7",Style:"Speed & Dribbling"},opts:[{en:"Vinicius Jr.",ru:"Винисиус Жуниор",correct:true},{en:"Rodrygo",ru:"Родриго",correct:false},{en:"Neymar Jr.",ru:"Неймар",correct:false},{en:"Richarlison",ru:"Ришарлисон",correct:false}],cardName:"Vinicius Jr.",cardEmoji:"🇧🇷",rarity:"epic",fact:"Vinicius Jr. scored the winning goal in the 2022 Champions League Final for Real Madrid.",factRu:"Винисиус забил победный гол в финале Лиги чемпионов 2022 года."},
+    {id:"p9",diff:"easy",en:"What country does Cristiano Ronaldo play for?",ru:"За какую страну играет Криштиану Роналду?",type:"text",opts:[{en:"Portugal",ru:"Португалия",correct:true},{en:"Spain",ru:"Испания",correct:false},{en:"Brazil",ru:"Бразилия",correct:false},{en:"Italy",ru:"Италия",correct:false}],cardName:"Portugal 🇵🇹",cardEmoji:"🇵🇹",rarity:"common",fact:"Ronaldo is Portugal's all-time top scorer and their most capped player.",factRu:"Роналду — лучший бомбардир и самый опытный игрок сборной Португалии."},
+    {id:"p10",diff:"medium",en:"How many Ballon d'Or awards has Lionel Messi won?",ru:"Сколько раз Лионель Месси выигрывал «Золотой мяч»?",type:"text",opts:[{en:"8",ru:"8",correct:true},{en:"6",ru:"6",correct:false},{en:"7",ru:"7",correct:false},{en:"5",ru:"5",correct:false}],cardName:"8× Ballon d'Or",cardEmoji:"🥇",rarity:"legendary",fact:"Messi won his 8th Ballon d'Or in 2023, after Argentina won the 2022 World Cup.",factRu:"Месси выиграл 8-й «Золотой мяч» в 2023 году после победы Аргентины на ЧМ-2022."},
+    {id:"p11",diff:"easy",en:"Which club does Erling Haaland play for?",ru:"За какой клуб играет Эрлинг Холанд?",type:"text",opts:[{en:"Manchester City",ru:"Манчестер Сити",correct:true},{en:"Manchester United",ru:"Манчестер Юнайтед",correct:false},{en:"Chelsea",ru:"Челси",correct:false},{en:"Arsenal",ru:"Арсенал",correct:false}],cardName:"Haaland's Club",cardEmoji:"⚽",rarity:"common",fact:"Haaland joined Man City in 2022 from Borussia Dortmund for €60 million.",factRu:"Холанд перешёл в Ман Сити в 2022 году из Боруссии Дортмунд за €60 млн."},
+    {id:"p12",diff:"medium",en:"What position does Mohamed Salah play?",ru:"На какой позиции играет Мохамед Салах?",type:"text",opts:[{en:"Right Winger",ru:"Правый вингер",correct:true},{en:"Striker",ru:"Нападающий",correct:false},{en:"Midfielder",ru:"Полузащитник",correct:false},{en:"Goalkeeper",ru:"Вратарь",correct:false}],cardName:"Salah's Position",cardEmoji:"➡️",rarity:"common",fact:"Salah is famous for cutting inside from the right wing onto his stronger left foot.",factRu:"Салах знаменит тем, что врывается с правого края и бьёт более сильной левой ногой."},
+    {id:"p13",diff:"hard",en:"Which country does Kylian Mbappé represent internationally?",ru:"Какую страну представляет Килиан Мбаппе на международном уровне?",type:"text",opts:[{en:"France",ru:"Франция",correct:true},{en:"Cameroon",ru:"Камерун",correct:false},{en:"Algeria",ru:"Алжир",correct:false},{en:"Morocco",ru:"Марокко",correct:false}],cardName:"France 🇫🇷",cardEmoji:"🇫🇷",rarity:"rare",fact:"Mbappé's parents are from Cameroon and Algeria, but he chose to play for France.",factRu:"Родители Мбаппе из Камеруна и Алжира, но он выбрал сборную Франции."},
+    {id:"p14",diff:"hard",en:"How old was Mbappé when he scored at his first World Cup?",ru:"Сколько лет было Мбаппе, когда он забил на своём первом Кубке мира?",type:"text",opts:[{en:"19",ru:"19",correct:true},{en:"21",ru:"21",correct:false},{en:"18",ru:"18",correct:false},{en:"20",ru:"20",correct:false}],cardName:"Young Star",cardEmoji:"🌟",rarity:"epic",fact:"Mbappé scored 4 goals at the 2018 World Cup aged 19, becoming a teen World Cup champion.",factRu:"Мбаппе забил 4 гола на ЧМ-2018 в 19 лет и стал чемпионом мира."},
+    {id:"p15",diff:"medium",en:"Neymar is the all-time top scorer for which national team?",ru:"Неймар является лучшим бомбардиром в истории какой сборной?",type:"text",opts:[{en:"Brazil",ru:"Бразилия",correct:true},{en:"Argentina",ru:"Аргентина",correct:false},{en:"Colombia",ru:"Колумбия",correct:false},{en:"Chile",ru:"Чили",correct:false}],cardName:"Brazil Legend",cardEmoji:"🇧🇷",rarity:"rare",fact:"Neymar surpassed Pelé's Brazil goal record of 77 goals in 2023.",factRu:"Неймар превзошёл рекорд Пеле — 77 голов за Бразилию — в 2023 году."},
+  ]
+},
+{
+  id:"culture", name:"Culture & Flags", nameRu:"Культура и Флаги", emoji:"🎭", color:"#ff6b6b",
+  bg:"linear-gradient(160deg,#1a0000 0%,#3d0f0f 60%,#550a0a 100%)",
+  desc:"Flags, traditions & world culture", descRu:"Флаги, традиции и культура мира",
+  questions:[
+    {id:"f1",diff:"easy",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"jp",opts:[{en:"Japan",ru:"Япония",correct:true},{en:"China",ru:"Китай",correct:false},{en:"South Korea",ru:"Южная Корея",correct:false},{en:"Vietnam",ru:"Вьетнам",correct:false}],cardName:"Japan 🇯🇵",cardEmoji:"🇯🇵",rarity:"common",fact:"Japan's flag is called Nisshōki — the white represents purity and the red circle is the sun.",factRu:"Флаг Японии — Нисёки. Белый — чистота, красный круг — солнце."},
+    {id:"f2",diff:"easy",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"fr",opts:[{en:"France",ru:"Франция",correct:true},{en:"Italy",ru:"Италия",correct:false},{en:"Netherlands",ru:"Нидерланды",correct:false},{en:"Romania",ru:"Румыния",correct:false}],cardName:"France 🇫🇷",cardEmoji:"🇫🇷",rarity:"common",fact:"France's blue, white and red flag is called the Tricolore and dates back to the 1789 Revolution.",factRu:"Сине-бело-красный флаг Франции — Триколор, появился в революцию 1789 года."},
+    {id:"f3",diff:"easy",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"br",opts:[{en:"Brazil",ru:"Бразилия",correct:true},{en:"Bolivia",ru:"Боливия",correct:false},{en:"Saudi Arabia",ru:"Саудовская Аравия",correct:false},{en:"Nigeria",ru:"Нигерия",correct:false}],cardName:"Brazil 🇧🇷",cardEmoji:"🇧🇷",rarity:"common",fact:"Brazil's flag has a blue circle with 27 stars — one for each state and the Federal District.",factRu:"На флаге Бразилии — синий круг с 27 звёздами, по одной на каждый штат."},
+    {id:"f4",diff:"medium",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"au",opts:[{en:"Australia",ru:"Австралия",correct:true},{en:"New Zealand",ru:"Новая Зеландия",correct:false},{en:"United Kingdom",ru:"Великобритания",correct:false},{en:"Canada",ru:"Канада",correct:false}],cardName:"Australia 🇦🇺",cardEmoji:"🇦🇺",rarity:"rare",fact:"Australia's flag has the Union Jack (UK flag), the Southern Cross stars, and the Commonwealth Star.",factRu:"На флаге Австралии — Юнион Джек, звёзды Южного Креста и Звезда Содружества."},
+    {id:"f5",diff:"medium",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"in",opts:[{en:"India",ru:"Индия",correct:true},{en:"Pakistan",ru:"Пакистан",correct:false},{en:"Bangladesh",ru:"Бангладеш",correct:false},{en:"Sri Lanka",ru:"Шри-Ланка",correct:false}],cardName:"India 🇮🇳",cardEmoji:"🇮🇳",rarity:"rare",fact:"India's flag has a spinning wheel called the Ashoka Chakra with 24 spokes.",factRu:"На флаге Индии — прялка Ашока Чакра с 24 спицами."},
+    {id:"f6",diff:"hard",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"eg",opts:[{en:"Egypt",ru:"Египет",correct:true},{en:"Iraq",ru:"Ирак",correct:false},{en:"Syria",ru:"Сирия",correct:false},{en:"Yemen",ru:"Йемен",correct:false}],cardName:"Egypt 🇪🇬",cardEmoji:"🇪🇬",rarity:"epic",fact:"Egypt's flag has the Eagle of Saladin — a golden eagle which is the national symbol.",factRu:"На флаге Египта — орёл Саладина, золотой орёл, национальный символ страны."},
+    {id:"f7",diff:"easy",en:"🇯🇵 Japan — What is the ancient art of folding paper into shapes?",ru:"🇯🇵 Япония — Как называется древнее искусство складывания бумаги?",type:"text",opts:[{en:"Origami",ru:"Оригами",correct:true},{en:"Ikebana",ru:"Икебана",correct:false},{en:"Kabuki",ru:"Кабуки",correct:false},{en:"Bonsai",ru:"Бонсай",correct:false}],cardName:"Origami ✂️",cardEmoji:"🇯🇵",rarity:"common",fact:"'Origami' means fold paper in Japanese. A traditional crane needs about 60 folds!",factRu:"«Оригами» — складывать бумагу по-японски. Журавль требует около 60 сгибов!"},
+    {id:"f8",diff:"easy",en:"🇧🇷 Brazil — What is the world-famous annual street carnival in Rio called?",ru:"🇧🇷 Бразилия — Как называется знаменитый карнавал в Рио?",type:"text",opts:[{en:"Rio Carnival",ru:"Карнавал в Рио",correct:true},{en:"Venice Carnival",ru:"Венецианский карнавал",correct:false},{en:"Notting Hill",ru:"Ноттинг Хилл",correct:false},{en:"Mardi Gras",ru:"Марди Гра",correct:false}],cardName:"Rio Carnival 🎉",cardEmoji:"🇧🇷",rarity:"rare",fact:"About 2 million people dance in Rio Carnival streets every single day for 5 days!",factRu:"Около 2 миллионов человек танцуют на улицах Рио каждый день в течение 5 дней!"},
+    {id:"f9",diff:"medium",en:"🇮🇳 India — Emperor Shah Jahan built the Taj Mahal as a tomb for whom?",ru:"🇮🇳 Индия — Для кого Шах-Джахан построил Тадж-Махал?",type:"text",opts:[{en:"His wife Mumtaz Mahal",ru:"Его жены Мумтаз-Махал",correct:true},{en:"His father",ru:"Своего отца",correct:false},{en:"Himself",ru:"Себя самого",correct:false},{en:"The god Shiva",ru:"Бога Шивы",correct:false}],cardName:"Taj Mahal 🕌",cardEmoji:"🇮🇳",rarity:"epic",fact:"20,000 workers built the Taj Mahal over 22 years (1631–1653) from pure white marble.",factRu:"20 000 рабочих строили Тадж-Махал 22 года (1631–1653) из белого мрамора."},
+    {id:"f10",diff:"medium",en:"🇪🇸 Spain — What is the passionate Spanish dance with stamping feet?",ru:"🇪🇸 Испания — Как называется испанский танец с топотом ног?",type:"text",opts:[{en:"Flamenco",ru:"Фламенко",correct:true},{en:"Tango",ru:"Танго",correct:false},{en:"Salsa",ru:"Сальса",correct:false},{en:"Bolero",ru:"Болеро",correct:false}],cardName:"Flamenco 💃",cardEmoji:"🇪🇸",rarity:"rare",fact:"Flamenco is from Andalusia, Spain and became UNESCO world heritage in 2010.",factRu:"Фламенко из Андалусии, Испания. В 2010 году стало наследием ЮНЕСКО."},
+    {id:"f11",diff:"hard",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"ng",opts:[{en:"Nigeria",ru:"Нигерия",correct:true},{en:"Ivory Coast",ru:"Кот-д'Ивуар",correct:false},{en:"Cameroon",ru:"Камерун",correct:false},{en:"Ghana",ru:"Гана",correct:false}],cardName:"Nigeria 🇳🇬",cardEmoji:"🇳🇬",rarity:"epic",fact:"Nigeria's green and white flag: green represents agriculture, white represents peace.",factRu:"Зелёный цвет флага Нигерии — сельское хозяйство, белый — мир."},
+    {id:"f12",diff:"hard",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"ar",opts:[{en:"Argentina",ru:"Аргентина",correct:true},{en:"Greece",ru:"Греция",correct:false},{en:"Uruguay",ru:"Уругвай",correct:false},{en:"Israel",ru:"Израиль",correct:false}],cardName:"Argentina 🇦🇷",cardEmoji:"🇦🇷",rarity:"rare",fact:"Argentina's flag has the Sun of May — a golden sun with a human face, representing freedom.",factRu:"На флаге Аргентины — Майское солнце с человеческим лицом, символ свободы."},
+    {id:"f13",diff:"medium",en:"🇨🇳 China — What is China's biggest festival based on the lunar calendar?",ru:"🇨🇳 Китай — Как называется главный праздник Китая по лунному календарю?",type:"text",opts:[{en:"Spring Festival (Chūnjié)",ru:"Праздник весны (Чунь Цзе)",correct:true},{en:"Dragon Boat Festival",ru:"Праздник лодок-дракона",correct:false},{en:"Mid-Autumn Festival",ru:"Праздник середины осени",correct:false},{en:"Lantern Festival",ru:"Праздник фонарей",correct:false}],cardName:"China 🐉",cardEmoji:"🇨🇳",rarity:"epic",fact:"Chinese New Year lasts 15 days — fireworks, red money envelopes, and dragon parades!",factRu:"Китайский Новый год — 15 дней: фейерверки, красные конверты, парады дракона!"},
+    {id:"f14",diff:"hard",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"ru",opts:[{en:"Russia",ru:"Россия",correct:true},{en:"Serbia",ru:"Сербия",correct:false},{en:"Slovakia",ru:"Словакия",correct:false},{en:"Slovenia",ru:"Словения",correct:false}],cardName:"Russia 🇷🇺",cardEmoji:"🇷🇺",rarity:"rare",fact:"Russia's white-blue-red tricolour was introduced by Peter the Great in the 17th century.",factRu:"Бело-сине-красный триколор России введён Петром Великим в XVII веке."},
+    {id:"f15",diff:"easy",en:"Which country does this flag belong to?",ru:"Какой стране принадлежит этот флаг?",type:"flag",flagCode:"de",opts:[{en:"Germany",ru:"Германия",correct:true},{en:"Belgium",ru:"Бельгия",correct:false},{en:"Austria",ru:"Австрия",correct:false},{en:"Hungary",ru:"Венгрия",correct:false}],cardName:"Germany 🇩🇪",cardEmoji:"🇩🇪",rarity:"common",fact:"Germany's black, red and gold flag was adopted in 1949 after World War II.",factRu:"Чёрно-красно-золотой флаг Германии принят в 1949 году после Второй мировой войны."},
+  ]
+},
+{
+  id:"geography", name:"World Capitals", nameRu:"Столицы Мира", emoji:"🌍", color:"#818cf8",
+  bg:"linear-gradient(160deg,#0d0020 0%,#1e0050 60%,#250060 100%)",
+  desc:"Countries, capitals & geography", descRu:"Страны, столицы и география",
+  questions:[
+    {id:"g1",diff:"easy",en:"What is the capital city of France?",ru:"Какая столица Франции?",type:"text",opts:[{en:"Paris",ru:"Париж",correct:true},{en:"Lyon",ru:"Лион",correct:false},{en:"Marseille",ru:"Марсель",correct:false},{en:"Bordeaux",ru:"Бордо",correct:false}],cardName:"Paris 🗼",cardEmoji:"🇫🇷",rarity:"common",fact:"Paris is called 'The City of Light'. The Eiffel Tower is 330m tall, built in 1889.",factRu:"Париж — «Город света». Эйфелева башня — 330 м, построена в 1889 году."},
+    {id:"g2",diff:"easy",en:"Which is the largest country in the world by land area?",ru:"Какая страна самая большая по площади?",type:"text",opts:[{en:"Russia",ru:"Россия",correct:true},{en:"Canada",ru:"Канада",correct:false},{en:"China",ru:"Китай",correct:false},{en:"USA",ru:"США",correct:false}],cardName:"Russia 🌐",cardEmoji:"🇷🇺",rarity:"common",fact:"Russia spans 11 time zones — from Eastern Europe all the way to the Pacific Ocean!",factRu:"Россия охватывает 11 часовых поясов — от Восточной Европы до Тихого океана!"},
+    {id:"g3",diff:"medium",en:"What is the capital of Australia? (NOT Sydney!)",ru:"Какая столица Австралии? (НЕ Сидней!)",type:"text",opts:[{en:"Canberra",ru:"Канберра",correct:true},{en:"Sydney",ru:"Сидней",correct:false},{en:"Melbourne",ru:"Мельбурн",correct:false},{en:"Brisbane",ru:"Брисбен",correct:false}],cardName:"Australia 🦘",cardEmoji:"🇦🇺",rarity:"rare",fact:"Canberra was built as capital because Sydney and Melbourne both wanted to be it!",factRu:"Канберра построена потому что Сидней и Мельбурн оба хотели стать столицей!"},
+    {id:"g4",diff:"medium",en:"Which is the longest river in the world?",ru:"Какая самая длинная река в мире?",type:"text",opts:[{en:"The Nile (Africa)",ru:"Нил (Африка)",correct:true},{en:"Amazon (S.America)",ru:"Амазонка (Ю.Америка)",correct:false},{en:"Yangtze (China)",ru:"Янцзы (Китай)",correct:false},{en:"Mississippi (USA)",ru:"Миссисипи (США)",correct:false}],cardName:"The Nile 🌊",cardEmoji:"🇪🇬",rarity:"epic",fact:"The Nile is 6,650 km long and flows through 11 African countries including Egypt.",factRu:"Нил — 6 650 км, протекает через 11 африканских стран, включая Египет."},
+    {id:"g5",diff:"hard",en:"What is the capital of Brazil? (NOT Rio de Janeiro!)",ru:"Какая столица Бразилии? (НЕ Рио-де-Жанейро!)",type:"text",opts:[{en:"Brasília",ru:"Бразилиа",correct:true},{en:"Rio de Janeiro",ru:"Рио-де-Жанейро",correct:false},{en:"São Paulo",ru:"Сан-Паулу",correct:false},{en:"Salvador",ru:"Салвадор",correct:false}],cardName:"Brasília 🏛️",cardEmoji:"🇧🇷",rarity:"rare",fact:"Brasília was purpose-built as Brazil's capital in just 41 months, opening 21 April 1960.",factRu:"Бразилиа построена за 41 месяц и открылась 21 апреля 1960 года."},
+    {id:"g6",diff:"easy",en:"What is the capital of Japan?",ru:"Какая столица Японии?",type:"text",opts:[{en:"Tokyo",ru:"Токио",correct:true},{en:"Osaka",ru:"Осака",correct:false},{en:"Kyoto",ru:"Киото",correct:false},{en:"Hiroshima",ru:"Хиросима",correct:false}],cardName:"Tokyo 🗾",cardEmoji:"🇯🇵",rarity:"common",fact:"Tokyo is the world's most populous metropolitan area with over 37 million people.",factRu:"Токио — крупнейший городской район мира с населением более 37 миллионов человек."},
+    {id:"g7",diff:"easy",en:"What is the capital of Germany?",ru:"Какая столица Германии?",type:"text",opts:[{en:"Berlin",ru:"Берлин",correct:true},{en:"Munich",ru:"Мюнхен",correct:false},{en:"Hamburg",ru:"Гамбург",correct:false},{en:"Frankfurt",ru:"Франкфурт",correct:false}],cardName:"Berlin 🇩🇪",cardEmoji:"🇩🇪",rarity:"common",fact:"Berlin has the largest train station in Europe — Berlin Hauptbahnhof, opened in 2006.",factRu:"В Берлине находится крупнейший вокзал Европы — Берлинский главный, открытый в 2006 году."},
+    {id:"g8",diff:"medium",en:"What is the capital of Canada?",ru:"Какая столица Канады?",type:"text",opts:[{en:"Ottawa",ru:"Оттава",correct:true},{en:"Toronto",ru:"Торонто",correct:false},{en:"Vancouver",ru:"Ванкувер",correct:false},{en:"Montreal",ru:"Монреаль",correct:false}],cardName:"Ottawa 🍁",cardEmoji:"🇨🇦",rarity:"rare",fact:"Ottawa was chosen as Canada's capital in 1857 by Queen Victoria herself.",factRu:"Оттаву выбрала столицей Канады сама королева Виктория в 1857 году."},
+    {id:"g9",diff:"medium",en:"What is the capital of Argentina?",ru:"Какая столица Аргентины?",type:"text",opts:[{en:"Buenos Aires",ru:"Буэнос-Айрес",correct:true},{en:"Córdoba",ru:"Кордова",correct:false},{en:"Rosario",ru:"Росарио",correct:false},{en:"Mendoza",ru:"Мендоса",correct:false}],cardName:"Buenos Aires 🇦🇷",cardEmoji:"🇦🇷",rarity:"common",fact:"Buenos Aires means 'fair winds' in Spanish. Lionel Messi was born in Rosario, Argentina.",factRu:"Буэнос-Айрес — «попутный ветер» по-испански. Месси родился в Росарио."},
+    {id:"g10",diff:"hard",en:"What is the capital of Egypt?",ru:"Какая столица Египта?",type:"text",opts:[{en:"Cairo",ru:"Каир",correct:true},{en:"Alexandria",ru:"Александрия",correct:false},{en:"Luxor",ru:"Луксор",correct:false},{en:"Giza",ru:"Гиза",correct:false}],cardName:"Cairo 🇪🇬",cardEmoji:"🇪🇬",rarity:"rare",fact:"Cairo is Africa's largest city and home to the ancient pyramids of Giza, built 4,500 years ago.",factRu:"Каир — крупнейший город Африки. Рядом — пирамиды Гизы, построенные 4500 лет назад."},
+    {id:"g11",diff:"easy",en:"On which continent is Brazil located?",ru:"На каком континенте расположена Бразилия?",type:"text",opts:[{en:"South America",ru:"Южная Америка",correct:true},{en:"Africa",ru:"Африка",correct:false},{en:"North America",ru:"Северная Америка",correct:false},{en:"Asia",ru:"Азия",correct:false}],cardName:"S.America 🌎",cardEmoji:"🌎",rarity:"common",fact:"Brazil is the largest country in South America and the 5th largest in the world.",factRu:"Бразилия — крупнейшая страна Южной Америки и 5-я в мире по площади."},
+    {id:"g12",diff:"medium",en:"Which country has the most people in the world?",ru:"В какой стране живёт больше всего людей?",type:"text",opts:[{en:"India",ru:"Индия",correct:true},{en:"China",ru:"Китай",correct:false},{en:"USA",ru:"США",correct:false},{en:"Indonesia",ru:"Индонезия",correct:false}],cardName:"India 🇮🇳",cardEmoji:"🇮🇳",rarity:"rare",fact:"India overtook China as the world's most populous country in 2023 with 1.4 billion people.",factRu:"Индия обошла Китай как самую населённую страну в 2023 году — 1,4 миллиарда человек."},
+    {id:"g13",diff:"medium",en:"What is the tallest mountain in the world?",ru:"Какая самая высокая гора в мире?",type:"text",opts:[{en:"Mount Everest",ru:"Эверест",correct:true},{en:"K2",ru:"К2",correct:false},{en:"Kilimanjaro",ru:"Килиманджаро",correct:false},{en:"Mont Blanc",ru:"Монблан",correct:false}],cardName:"Everest 🏔️",cardEmoji:"🏔️",rarity:"epic",fact:"Mount Everest is 8,849 metres tall — on the border of Nepal and China.",factRu:"Высота Эвереста — 8 849 метров. Он находится на границе Непала и Китая."},
+    {id:"g14",diff:"hard",en:"Which ocean is the largest in the world?",ru:"Какой океан самый большой в мире?",type:"text",opts:[{en:"Pacific Ocean",ru:"Тихий океан",correct:true},{en:"Atlantic Ocean",ru:"Атлантический океан",correct:false},{en:"Indian Ocean",ru:"Индийский океан",correct:false},{en:"Arctic Ocean",ru:"Северный Ледовитый океан",correct:false}],cardName:"Pacific 🌊",cardEmoji:"🌊",rarity:"epic",fact:"The Pacific Ocean covers more area than all of Earth's continents combined.",factRu:"Тихий океан занимает площадь больше, чем все континенты Земли вместе взятые."},
+    {id:"g15",diff:"hard",en:"What is the capital of Nigeria?",ru:"Какая столица Нигерии?",type:"text",opts:[{en:"Abuja",ru:"Абуджа",correct:true},{en:"Lagos",ru:"Лагос",correct:false},{en:"Kano",ru:"Кано",correct:false},{en:"Ibadan",ru:"Ибадан",correct:false}],cardName:"Abuja 🇳🇬",cardEmoji:"🇳🇬",rarity:"rare",fact:"Abuja replaced Lagos as Nigeria's capital in 1991. It was purpose-built as a neutral capital.",factRu:"Абуджа заменила Лагос в качестве столицы Нигерии в 1991 году. Построена специально."},
+  ]
+},
 ];
-
-// ── REAL IMAGE URLS (work on GitHub Pages / any real web server) ───────────────
-const CREST_URLS = {
-  mancity:     "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/150px-Manchester_City_FC_badge.svg.png",
-  manutd:      "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/150px-Manchester_United_FC_crest.svg.png",
-  liverpool:   "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/150px-Liverpool_FC.svg.png",
-  chelsea:     "https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/150px-Chelsea_FC.svg.png",
-  arsenal:     "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/150px-Arsenal_FC.svg.png",
-  barcelona:   "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/150px-FC_Barcelona_%28crest%29.svg.png",
-  realmadrid:  "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png",
-  psg:         "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/150px-Paris_Saint-Germain_F.C..svg.png",
-  juventus:    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Juventus_FC_2017_icon_%28black%29.svg/150px-Juventus_FC_2017_icon_%28black%29.svg.png",
-  bayernmunich:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/150px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png",
-};
-const PLAYER_URLS = {
-  ronaldo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Cristiano_Ronaldo_in_2023.jpg/300px-Cristiano_Ronaldo_in_2023.jpg",
-  messi:   "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg/300px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg",
-  mbappe:  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Kylian_Mbapp%C3%A9_World_Cup_Trophy.jpg/300px-Kylian_Mbapp%C3%A9_World_Cup_Trophy.jpg",
-  haaland: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Erling_Haaland_2023_%28cropped-v2%29.jpg/300px-Erling_Haaland_2023_%28cropped-v2%29.jpg",
-  neymar:  "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Neymar_jr_2018.jpg/300px-Neymar_jr_2018.jpg",
-};
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 let lang = "en";
@@ -391,15 +293,28 @@ let score = 0;
 let selected = false;
 let dadUsed = false;
 let eliminated = [];
-let collectedCards = JSON.parse(localStorage.getItem("petr-cards") || "[]");
+let collectedCards = JSON.parse(localStorage.getItem("petr-cards-v2") || "[]");
+const TOTAL_Q = WORLDS.reduce((s,w)=>s+w.questions.length,0);
 
-function saveCards() { localStorage.setItem("petr-cards", JSON.stringify(collectedCards)); }
+function saveCards() { localStorage.setItem("petr-cards-v2", JSON.stringify(collectedCards)); }
 function t(en, ru) { return lang === "ru" ? ru : en; }
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+window.onload = async () => {
+  renderHome();
+  // Load badges in background
+  await loadBadges();
+  // Re-render if on quiz screen showing crests
+  if (currentWorld?.id === 'clubs' && document.getElementById('screen-quiz').classList.contains('active')) {
+    renderQuestion();
+  }
+};
 
 // ── SCREENS ───────────────────────────────────────────────────────────────────
 function showScreen(name) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  document.getElementById("screen-" + name).classList.add("active");
+  const el = document.getElementById("screen-" + name);
+  el.classList.add("active");
   if (name === "home")    renderHome();
   if (name === "worlds")  renderWorlds();
   if (name === "gallery") renderGallery();
@@ -407,63 +322,64 @@ function showScreen(name) {
 
 function toggleLang() {
   lang = lang === "en" ? "ru" : "en";
-  // Update all lang buttons
-  document.querySelectorAll("[id^='lang-btn']").forEach(b => b.textContent = lang === "en" ? "🇷🇺 RU" : "🇬🇧 EN");
-  // Update all data-en/ru elements
-  document.querySelectorAll("[data-en]").forEach(el => el.textContent = lang === "en" ? el.dataset.en : el.dataset.ru);
-  // Re-render current screen
+  const btnLabel = lang === "en" ? "🇷🇺 RU" : "🇬🇧 EN";
+  document.querySelectorAll("[id^='lang-btn']").forEach(b => b.textContent = btnLabel);
   const active = document.querySelector(".screen.active");
   if (active) {
-    const id = active.id.replace("screen-", "");
-    if (id === "home") renderHome();
-    if (id === "worlds") renderWorlds();
-    if (id === "quiz") renderQuestion();
-    if (id === "gallery") renderGallery();
+    const id = active.id.replace("screen-","");
+    if (id==="home") renderHome();
+    else if (id==="worlds") renderWorlds();
+    else if (id==="quiz") renderQuestion();
+    else if (id==="gallery") renderGallery();
   }
 }
 
 // ── HOME ──────────────────────────────────────────────────────────────────────
 function renderHome() {
+  document.getElementById("home-title").textContent = t("PETR'S","ИГРА");
+  document.getElementById("home-subtitle").textContent = t("WORLD CUP QUIZ","ПЕТРА");
+  document.getElementById("home-desc").textContent = t(`4 worlds · ${TOTAL_Q} questions · Collect all cards`,`4 мира · ${TOTAL_Q} вопросов · Собери все карточки`);
+  document.getElementById("btn-play").textContent = t("PLAY","ИГРАТЬ");
+  document.getElementById("btn-cards").textContent = t("CARDS","КАРТОЧКИ");
   document.getElementById("home-card-count").textContent = collectedCards.length;
-  const grid = document.getElementById("home-worlds");
-  grid.innerHTML = WORLDS.map(w => `
+  document.getElementById("home-worlds").innerHTML = WORLDS.map(w=>`
     <div class="world-icon" onclick="startWorld('${w.id}')" style="border:1px solid ${w.color}33">
       <div style="font-size:1.5rem">${w.emoji}</div>
-      <div class="barlow" style="font-size:0.7rem;color:${w.color};font-weight:700;margin-top:4px;line-height:1.2">${t(w.name, w.nameRu)}</div>
-    </div>
-  `).join("");
+      <div class="barlow" style="font-size:0.68rem;color:${w.color};font-weight:700;margin-top:4px;line-height:1.2">${t(w.name,w.nameRu)}</div>
+    </div>`).join("");
 }
 
 // ── WORLDS ────────────────────────────────────────────────────────────────────
 function renderWorlds() {
-  const list = document.getElementById("worlds-list");
-  list.innerHTML = WORLDS.map(w => {
-    const earned = collectedCards.filter(c => c.world === w.id).length;
-    const pct = (earned / w.questions.length) * 100;
-    return `
-      <div class="world-card" onclick="startWorld('${w.id}')" style="background:${w.bg};border-color:${w.color}44">
-        <div style="display:flex;align-items:center;gap:16px">
-          <div style="font-size:2.2rem">${w.emoji}</div>
-          <div style="flex:1">
-            <div class="bebas" style="font-size:1.45rem;color:${w.color}">${t(w.name, w.nameRu)}</div>
-            <div class="barlow" style="color:#9ca3af;font-size:0.8rem">${t(w.desc, w.descRu)}</div>
-          </div>
-          <div style="text-align:right">
-            <div class="bebas" style="font-size:1.5rem;color:#ffd700">${earned}/${w.questions.length}</div>
-            <div style="font-size:0.68rem;color:#6b7280">${t("cards","карт")}</div>
-          </div>
+  document.getElementById("worlds-title").textContent = t("CHOOSE YOUR WORLD","ВЫБЕРИ МИР");
+  document.getElementById("back-worlds").textContent = t("Back","Назад");
+  document.getElementById("worlds-list").innerHTML = WORLDS.map(w=>{
+    const earned = collectedCards.filter(c=>c.world===w.id).length;
+    const pct = (earned/w.questions.length)*100;
+    return `<div class="world-card" onclick="startWorld('${w.id}')" style="background:${w.bg};border-color:${w.color}44"
+      onmouseover="this.style.boxShadow='0 0 28px ${w.color}22'" onmouseout="this.style.boxShadow='none'">
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="font-size:2.2rem">${w.emoji}</div>
+        <div style="flex:1">
+          <div class="bebas" style="font-size:1.45rem;color:${w.color}">${t(w.name,w.nameRu)}</div>
+          <div class="barlow" style="color:#9ca3af;font-size:0.8rem">${t(w.desc,w.descRu)}</div>
         </div>
-        <div style="margin-top:10px;height:3px;background:rgba(255,255,255,0.07);border-radius:2px">
-          <div style="height:100%;background:${w.color};border-radius:2px;width:${pct}%;transition:width 0.5s"></div>
+        <div style="text-align:right">
+          <div class="bebas" style="font-size:1.5rem;color:#ffd700">${earned}/${w.questions.length}</div>
+          <div style="font-size:0.65rem;color:#6b7280">${t("cards","карт")}</div>
         </div>
-      </div>`;
+      </div>
+      <div style="margin-top:10px;height:3px;background:rgba(255,255,255,0.07);border-radius:2px">
+        <div style="height:100%;background:${w.color};border-radius:2px;width:${pct}%;transition:width 0.5s"></div>
+      </div>
+    </div>`;
   }).join("");
 }
 
 // ── QUIZ ──────────────────────────────────────────────────────────────────────
 function startWorld(id) {
-  currentWorld = WORLDS.find(w => w.id === id);
-  qIdx = 0; score = 0; selected = false; dadUsed = false; eliminated = [];
+  currentWorld = WORLDS.find(w=>w.id===id);
+  qIdx=0; score=0; selected=false; dadUsed=false; eliminated=[];
   showScreen("quiz");
   renderQuestion();
 }
@@ -472,255 +388,201 @@ function renderQuestion() {
   if (!currentWorld) return;
   const w = currentWorld;
   const q = w.questions[qIdx];
-
-  // Style quiz screen background
   document.getElementById("screen-quiz").style.background = w.bg;
-
-  // World title
-  document.getElementById("quiz-world-title").textContent = `${w.emoji} ${t(w.name, w.nameRu)}`;
+  document.getElementById("quiz-world-title").textContent = `${w.emoji} ${t(w.name,w.nameRu)}`;
   document.getElementById("quiz-world-title").style.color = w.color;
+  document.getElementById("back-quiz").textContent = t("Worlds","Миры");
 
-  // Progress dots
-  const prog = document.getElementById("quiz-progress");
-  prog.innerHTML = w.questions.map((_, i) => `<div class="prog-dot" style="background:${i < qIdx ? w.color : i === qIdx ? w.color + "66" : "rgba(255,255,255,0.08)"}"></div>`).join("");
+  // Progress
+  document.getElementById("quiz-progress").innerHTML = w.questions.map((_,i)=>
+    `<div class="prog-dot" style="background:${i<qIdx?w.color:i===qIdx?w.color+'66':'rgba(255,255,255,0.08)'}"></div>`
+  ).join("");
 
-  // Q num + score
-  document.getElementById("quiz-qnum").textContent = t(`Q${qIdx+1} of ${w.questions.length}`, `В${qIdx+1} из ${w.questions.length}`);
+  document.getElementById("quiz-qnum").textContent = t(`Q${qIdx+1} of ${w.questions.length}`,`В${qIdx+1} из ${w.questions.length}`);
   document.getElementById("quiz-score").textContent = `⚽ ${score}`;
   document.getElementById("quiz-score").style.color = w.color;
 
-  // Difficulty
   const db = document.getElementById("quiz-diff-badge");
   db.textContent = t(q.diff.toUpperCase(), DR[q.diff].toUpperCase());
-  db.style.background = DC[q.diff] + "15";
-  db.style.border = `1px solid ${DC[q.diff]}44`;
-  db.style.color = DC[q.diff];
+  db.style.cssText += `;background:${DC[q.diff]}15;border:1px solid ${DC[q.diff]}44;color:${DC[q.diff]}`;
 
-  // Question text
   document.getElementById("quiz-question").textContent = t(q.en, q.ru);
 
-  // Player card
+  // Player photo card
   const pc = document.getElementById("quiz-player-card");
   if (q.type === "player") {
-    const photoUrl = PLAYER_URLS[q.playerKey] || "";
-    const hints = Object.entries(q.hint).map(([k,v]) => `
-      <div class="hint-box">
-        <div class="hint-label">${k}</div>
-        <div class="hint-val">${v}</div>
-      </div>`).join("");
-    pc.innerHTML = `
-      <div class="player-card" style="border-color:${w.color}44">
-        <img src="${photoUrl}" class="player-photo" alt="${q.playerKey}" style="height:160px" onerror="this.style.display='none'"/>
-        <div class="player-hints">${hints}</div>
-      </div>`;
+    const photo = PLAYER_URLS[q.playerKey] || "";
+    const hints = Object.entries(q.hint).map(([k,v])=>`
+      <div class="hint-box"><div class="hint-label">${k}</div><div class="hint-val">${v}</div></div>`).join("");
+    pc.innerHTML = `<div class="player-card" style="border-color:${w.color}44">
+      <img src="${photo}" class="player-photo" alt="" onerror="this.style.display='none'"/>
+      <div class="player-hints">${hints}</div>
+    </div>`;
   } else {
     pc.innerHTML = "";
   }
 
   // Options
-  const opts = document.getElementById("quiz-options");
+  const optsEl = document.getElementById("quiz-options");
   if (q.type === "crest") {
-    opts.style.display = "grid";
-    opts.style.gridTemplateColumns = "1fr 1fr";
-    opts.style.gap = "10px";
-    opts.style.marginBottom = "16px";
-    opts.innerHTML = q.opts.map((o, i) => {
-      const imgUrl = CREST_URLS[o.key] || "";
-      return `
-        <div class="crest-card" id="opt-${i}" onclick="pickAnswer(${i})" style="border-color:${w.color}33">
-          <img src="${imgUrl}" class="crest-img" alt="${o.label}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>'"/>
+    optsEl.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px";
+    optsEl.innerHTML = q.opts.map((o,i)=>{
+      const imgSrc = BADGE_URLS[o.key] || "";
+      
+        const imgHtml = imgSrc
+          ? `<img src="${imgSrc}" class="crest-img" alt="${o.label}" onerror="this.parentElement.innerHTML='<div style=\\'font-size:2rem;padding:20px\\'>🛡️</div>'">`
+          : `<div style="font-size:2rem;padding:20px;background:#f5f5f5;border-radius:6px;display:flex;align-items:center;justify-content:center"><span class="loading-spinner">⚽</span></div>`;
+        return `<div class="crest-card" id="opt-${i}" onclick="pickAnswer(${i})" style="border-color:${w.color}33">
+          ${imgHtml}
           <div class="barlow" style="font-size:0.78rem;font-weight:700;text-align:center">${o.label}</div>
         </div>`;
-    }).join("");
-  } else {
-    opts.style.display = "flex";
-    opts.style.flexDirection = "column";
-    opts.style.gap = "8px";
-    opts.style.marginBottom = "16px";
-    opts.style.gridTemplateColumns = "";
-    opts.innerHTML = q.opts.map((o, i) => `
-      <button class="answer-btn" id="opt-${i}" onclick="pickAnswer(${i})" style="border-color:${w.color}33">
-        ${t(o.en, o.ru)}
-      </button>`).join("");
-  }
-
-  // Ask Dad button
-  const dad = document.getElementById("ask-dad-btn");
-  dad.style.display = "block";
-  dad.textContent = dadUsed
-    ? t("✅ Ask Dad already used", "✅ Помощь папы использована")
-    : t("🆘 Ask Dad — removes 2 wrong answers", "🆘 Спроси папу — убрать 2 неверных ответа");
-  dad.disabled = dadUsed;
-  dad.style.opacity = dadUsed ? "0.5" : "1";
-  dad.style.cursor = dadUsed ? "not-allowed" : "pointer";
-
-  // Hide feedback and next button
-  document.getElementById("quiz-feedback").innerHTML = "";
-  const nb = document.getElementById("quiz-next-btn");
-  nb.style.display = "none";
-  nb.style.background = w.color;
-  nb.style.borderColor = w.color;
-
-  selected = false;
-  eliminated = [];
-}
-
-function pickAnswer(idx) {
-  if (selected) return;
-  selected = true;
-  const w = currentWorld;
-  const q = w.questions[qIdx];
-  const isCorrect = q.opts[idx].correct;
-
-  // Highlight answers
-  q.opts.forEach((o, i) => {
-    const el = document.getElementById("opt-" + i);
-    if (!el) return;
-    if (o.correct) {
-      el.classList.add("correct");
-      el.querySelector && el.querySelector(".barlow") && (el.querySelector(".barlow").style.color = "#00d4aa");
-    } else if (i === idx && !o.correct) {
-      el.classList.add("wrong");
-    }
-  });
-
-  if (isCorrect) {
-    score++;
-    // Collect card
-    if (!collectedCards.find(c => c.id === q.id)) {
-      collectedCards.push({id:q.id, name:q.cardName, emoji:q.cardEmoji, rarity:q.rarity, world:w.id});
-      saveCards();
-    }
-  }
-
-  // Show feedback
-  const fb = document.getElementById("quiz-feedback");
-  const r = RARITY[q.rarity];
-  const newCardHtml = isCorrect && !collectedCards.find(c => c.id === q.id + "_shown") ? `
-    <div class="new-card" style="background:${r.color}12;border:1px solid ${r.color}44;color:${r.color}">
-      ${q.cardEmoji} ${t("New card: " + q.cardName, "Карточка: " + q.cardName)} · ${t(r.label, r.labelRu)}
-    </div>` : "";
-
-  fb.innerHTML = `
-    <div class="feedback ${isCorrect ? "correct" : "wrong"}">
-      <div class="feedback-title">${isCorrect ? t("⚽ CORRECT!", "⚽ ПРАВИЛЬНО!") : t("❌ WRONG!", "❌ НЕВЕРНО!")}</div>
-      <div class="feedback-fact">💡 ${t(q.fact, q.factRu)}</div>
-      ${isCorrect ? newCardHtml : ""}
-    </div>`;
-
-  // Show next button
-  const nb = document.getElementById("quiz-next-btn");
-  nb.style.display = "block";
-  nb.textContent = qIdx + 1 >= w.questions.length
-    ? t("🏆 SEE RESULTS", "🏆 РЕЗУЛЬТАТЫ")
-    : t("NEXT →", "ДАЛЬШЕ →");
-
-  // Hide ask dad
-  document.getElementById("ask-dad-btn").style.display = "none";
-}
-
-function askDad() {
-  if (dadUsed || selected) return;
-  dadUsed = true;
-  const q = currentWorld.questions[qIdx];
-  const wrongIdxs = q.opts.map((o,i) => o.correct ? -1 : i).filter(i => i >= 0);
-  const toElim = wrongIdxs.sort(() => Math.random() - 0.5).slice(0, 2);
-  toElim.forEach(i => {
-    const el = document.getElementById("opt-" + i);
-    if (el) { el.classList.add("eliminated"); el.onclick = null; }
-  });
-  const btn = document.getElementById("ask-dad-btn");
-  btn.textContent = t("✅ Ask Dad used", "✅ Помощь папы использована");
-  btn.disabled = true;
-  btn.style.opacity = "0.5";
-}
-
-function nextQuestion() {
-  qIdx++;
-  if (qIdx >= currentWorld.questions.length) {
-    showResult();
-  } else {
-    renderQuestion();
-  }
-}
-
-// ── RESULT ────────────────────────────────────────────────────────────────────
-function showResult() {
-  const total = currentWorld.questions.length;
-  const pct = Math.round((score / total) * 100);
-  const g = pct >= 80
-    ? {en:"CHAMPION! 🏆", ru:"ЧЕМПИОН! 🏆", c:"#ffd700"}
-    : pct >= 60
-    ? {en:"GREAT GAME! ⭐", ru:"ОТЛИЧНАЯ ИГРА! ⭐", c:"#00d4aa"}
-    : {en:"KEEP TRAINING! 💪", ru:"ТРЕНИРУЙСЯ! 💪", c:"#ff6b6b"};
-
-  document.getElementById("screen-result").style.background = currentWorld.bg;
-  document.getElementById("result-title").textContent = t(g.en, g.ru);
-  document.getElementById("result-title").style.color = g.c;
-  document.getElementById("result-score").innerHTML = `${score}<span style="color:${currentWorld.color}">/${total}</span>`;
-  document.getElementById("result-sub").textContent = `${t(currentWorld.name, currentWorld.nameRu)} · ${pct}%`;
-  document.getElementById("result-replay").textContent = t("🔄 PLAY AGAIN", "🔄 СНОВА");
-  document.getElementById("result-replay").style.background = currentWorld.color;
-  document.getElementById("result-replay").style.borderColor = currentWorld.color;
-
-  showScreen("result");
-  document.getElementById("screen-result").style.display = "flex";
-}
-
-function replayWorld() {
-  startWorld(currentWorld.id);
-}
-
-// ── GALLERY ───────────────────────────────────────────────────────────────────
-let galleryFilter = "all";
-function renderGallery() {
-  document.getElementById("gallery-count").textContent = t(
-    `${collectedCards.length} of 20 collected`,
-    `${collectedCards.length} из 20 собрано`
-  );
-
-  // Filters
-  const filters = [
-    {id:"all", label:t("All","Все")},
-    ...WORLDS.map(w => ({id:w.id, label:w.emoji+" "+t(w.name,w.nameRu)}))
-  ];
-  document.getElementById("gallery-filters").innerHTML = filters.map(f => `
-    <button onclick="setGalleryFilter('${f.id}')" style="background:${galleryFilter===f.id?"rgba(255,215,0,0.1)":"rgba(255,255,255,0.04)"};border:1px solid ${galleryFilter===f.id?"#ffd700":"#374151"};color:${galleryFilter===f.id?"#ffd700":"#9ca3af"};padding:5px 12px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:600">
-      ${f.label}
-    </button>`).join("");
-
-  const shown = galleryFilter === "all"
-    ? collectedCards
-    : collectedCards.filter(c => c.world === galleryFilter);
-
-  const grid = document.getElementById("gallery-grid");
-  if (shown.length === 0) {
-    grid.innerHTML = `<div style="text-align:center;padding:3rem;color:#6b7280;font-family:'Barlow Condensed',sans-serif"><div style="font-size:2.5rem;margin-bottom:8px">📭</div>${t("Answer correctly to collect cards!","Отвечай правильно — собирай карточки!")}</div>`;
-    return;
-  }
-  grid.style.display = "grid";
-  grid.style.gridTemplateColumns = "repeat(auto-fill,minmax(120px,1fr))";
-  grid.style.gap = "12px";
-  grid.innerHTML = shown.map(card => {
-    const r = RARITY[card.rarity];
-    const w = WORLDS.find(x => x.id === card.world);
-    return `
-      <div class="gallery-card" style="background:linear-gradient(135deg,#0d0d0d,${r.color}15);border:2px solid ${r.color}44;box-shadow:0 0 12px ${r.color}22">
-        <div style="font-size:1.8rem;margin-bottom:4px">${card.emoji}</div>
-        <div class="barlow" style="font-weight:700;font-size:0.8rem;margin-bottom:3px;line-height:1.2">${card.name}</div>
-        <div style="color:${r.color};font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">${t(r.label,r.labelRu)}</div>
-        ${w?`<div style="color:#6b7280;font-size:0.6rem;margin-top:3px">${w.emoji}</div>`:""}
+      }).join("");
+    } else if (q.type === "flag") {
+      optsEl.style.cssText = "display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px";
+      pc.innerHTML = `<div style="text-align:center;margin-bottom:14px;background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;border:1px solid rgba(255,255,255,0.1)">
+        <img src="${flagUrl(q.flagCode)}" style="width:200px;height:133px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,0.2)" alt="flag" onerror="this.parentElement.innerHTML='<div style=\\'font-size:4rem\\'>🏳️</div>'"/>
       </div>`;
-  }).join("");
-}
+      optsEl.innerHTML = q.opts.map((o,i)=>`
+        <button class="answer-btn" id="opt-${i}" onclick="pickAnswer(${i})" style="border-color:${w.color}33">
+          ${t(o.en,o.ru)}
+        </button>`).join("");
+    } else {
+      optsEl.style.cssText = "display:flex;flex-direction:column;gap:8px;margin-bottom:16px";
+      optsEl.innerHTML = q.opts.map((o,i)=>`
+        <button class="answer-btn" id="opt-${i}" onclick="pickAnswer(${i})" style="border-color:${w.color}33">
+          ${t(o.en,o.ru)}
+        </button>`).join("");
+    }
 
-function setGalleryFilter(id) {
-  galleryFilter = id;
-  renderGallery();
-}
+    const dad = document.getElementById("ask-dad-btn");
+    dad.style.display = "block";
+    dad.disabled = dadUsed;
+    dad.style.opacity = dadUsed ? "0.5" : "1";
+    dad.textContent = dadUsed ? t("✅ Ask Dad used","✅ Помощь папы использована") : t("🆘 Ask Dad — removes 2 wrong answers","🆘 Спроси папу — убрать 2 неверных ответа");
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
-renderHome();
+    document.getElementById("quiz-feedback").innerHTML = "";
+    const nb = document.getElementById("quiz-next-btn");
+    nb.style.display = "none";
+    nb.style.background = w.color;
+    nb.style.borderColor = w.color;
+
+    selected = false;
+    eliminated = [];
+  }
+
+  function pickAnswer(idx) {
+    if (selected) return;
+    selected = true;
+    const w = currentWorld;
+    const q = w.questions[qIdx];
+    const isCorrect = q.opts[idx].correct;
+
+    q.opts.forEach((o,i) => {
+      const el = document.getElementById("opt-"+i);
+      if (!el) return;
+      if (o.correct) el.classList.add("correct");
+      else if (i===idx && !o.correct) el.classList.add("wrong");
+      el.onclick = null;
+    });
+
+    if (isCorrect) {
+      score++;
+      if (!collectedCards.find(c=>c.id===q.id)) {
+        collectedCards.push({id:q.id,name:q.cardName,emoji:q.cardEmoji,rarity:q.rarity,world:w.id});
+        saveCards();
+      }
+    }
+
+    const r = RARITY[q.rarity];
+    const newCardHtml = isCorrect ? `<div class="new-card-badge" style="background:${r.color}12;border:1px solid ${r.color}44;color:${r.color}">${q.cardEmoji} ${t("New card: "+q.cardName,"Карточка: "+q.cardName)} · ${t(r.label,r.labelRu)}</div>` : "";
+
+    document.getElementById("quiz-feedback").innerHTML = `
+      <div class="feedback ${isCorrect?"correct":"wrong"}">
+        <div class="feedback-title">${isCorrect?t("⚽ CORRECT!","⚽ ПРАВИЛЬНО!"):t("❌ WRONG!","❌ НЕВЕРНО!")}</div>
+        <div class="feedback-fact">💡 ${t(q.fact,q.factRu)}</div>
+        ${newCardHtml}
+      </div>`;
+
+    const nb = document.getElementById("quiz-next-btn");
+    nb.style.display = "block";
+    nb.textContent = qIdx+1>=w.questions.length ? t("🏆 SEE RESULTS","🏆 РЕЗУЛЬТАТЫ") : t("NEXT →","ДАЛЬШЕ →");
+    document.getElementById("ask-dad-btn").style.display = "none";
+  }
+
+  function askDad() {
+    if (dadUsed || selected) return;
+    dadUsed = true;
+    const q = currentWorld.questions[qIdx];
+    const wrongs = q.opts.map((o,i)=>o.correct?-1:i).filter(i=>i>=0);
+    wrongs.sort(()=>Math.random()-.5).slice(0,2).forEach(i=>{
+      const el = document.getElementById("opt-"+i);
+      if (el) { el.classList.add("eliminated"); el.onclick=null; }
+    });
+    const btn = document.getElementById("ask-dad-btn");
+    btn.textContent = t("✅ Ask Dad used","✅ Помощь папы использована");
+    btn.disabled = true; btn.style.opacity="0.5";
+  }
+
+  function nextQuestion() {
+    qIdx++;
+    if (qIdx >= currentWorld.questions.length) showResult();
+    else renderQuestion();
+  }
+
+  function showResult() {
+    const total = currentWorld.questions.length;
+    const pct = Math.round((score/total)*100);
+    const g = pct>=80?{en:"CHAMPION! 🏆",ru:"ЧЕМПИОН! 🏆",c:"#ffd700"}
+             : pct>=60?{en:"GREAT GAME! ⭐",ru:"ОТЛИЧНАЯ ИГРА! ⭐",c:"#00d4aa"}
+             : {en:"KEEP TRAINING! 💪",ru:"ТРЕНИРУЙСЯ! 💪",c:"#ff6b6b"};
+    document.getElementById("screen-result").style.background = currentWorld.bg;
+    document.getElementById("result-title").textContent = t(g.en,g.ru);
+    document.getElementById("result-title").style.color = g.c;
+    document.getElementById("result-score").innerHTML = `${score}<span style="color:${currentWorld.color}">/${total}</span>`;
+    document.getElementById("result-sub").textContent = `${t(currentWorld.name,currentWorld.nameRu)} · ${pct}%`;
+    const rb = document.getElementById("result-replay");
+    rb.textContent = t("🔄 PLAY AGAIN","🔄 СНОВА");
+    rb.style.background = currentWorld.color;
+    rb.style.borderColor = currentWorld.color;
+    document.getElementById("result-gallery").textContent = t(`📦 MY CARDS (${collectedCards.length})`,`📦 МОИ КАРТОЧКИ (${collectedCards.length})`);
+    document.getElementById("result-home").textContent = t("🏠 HOME","🏠 ГЛАВНАЯ");
+    showScreen("result");
+    document.getElementById("screen-result").style.display = "flex";
+  }
+
+  function replayWorld() { startWorld(currentWorld.id); }
+
+  let galleryFilter = "all";
+  function setGalleryFilter(id) { galleryFilter=id; renderGallery(); }
+
+  function renderGallery() {
+    document.getElementById("gallery-title").textContent = t("CARD COLLECTION","КОЛЛЕКЦИЯ");
+    document.getElementById("back-gallery").textContent = t("Back","Назад");
+    document.getElementById("gallery-count").textContent = t(`${collectedCards.length} of ${TOTAL_Q} collected`,`${collectedCards.length} из ${TOTAL_Q} собрано`);
+    const filters = [{id:"all",label:t("All","Все")},...WORLDS.map(w=>({id:w.id,label:w.emoji+" "+t(w.name,w.nameRu)}))];
+    document.getElementById("gallery-filters").innerHTML = filters.map(f=>`
+      <button onclick="setGalleryFilter('${f.id}')" style="background:${galleryFilter===f.id?"rgba(255,215,0,0.1)":"rgba(255,255,255,0.04)"};border:1px solid ${galleryFilter===f.id?"#ffd700":"#374151"};color:${galleryFilter===f.id?"#ffd700":"#9ca3af"};padding:5px 12px;border-radius:20px;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:600">
+        ${f.label}
+      </button>`).join("");
+
+    const shown = galleryFilter==="all" ? collectedCards : collectedCards.filter(c=>c.world===galleryFilter);
+    const grid = document.getElementById("gallery-grid");
+    if (!shown.length) {
+      grid.innerHTML = `<div style="text-align:center;padding:3rem;color:#6b7280;font-family:'Barlow Condensed',sans-serif"><div style="font-size:2.5rem;margin-bottom:8px">📭</div>${t("Answer correctly to collect cards!","Отвечай правильно — собирай карточки!")}</div>`;
+      return;
+    }
+    grid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(115px,1fr));gap:10px";
+    grid.innerHTML = shown.map(card=>{
+      const r = RARITY[card.rarity];
+      const w = WORLDS.find(x=>x.id===card.world);
+      return `<div class="gallery-card" style="background:linear-gradient(135deg,#0d0d0d,${r.color}15);border:2px solid ${r.color}44;box-shadow:0 0 12px ${r.color}22">
+        <div style="font-size:1.8rem;margin-bottom:4px">${card.emoji}</div>
+        <div class="barlow" style="font-weight:700;font-size:0.78rem;margin-bottom:3px;line-height:1.2">${card.name}</div>
+        <div style="color:${r.color};font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em">${t(r.label,r.labelRu)}</div>
+        ${w?`<div style="color:#6b7280;font-size:0.58rem;margin-top:3px">${w.emoji}</div>`:""}
+      </div>`;
+    }).join("");
+  }
 </script>
 </body>
 </html>
