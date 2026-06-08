@@ -154,20 +154,23 @@ const TEAM_IDS = {
   bayernmunich: "133755",
 };
 
-// Will be populated on load
-const BADGE_URLS = {};
+// Hardcoded correct badge URLs — Wikipedia SVG thumbnails (open CORS on real browsers)
+const BADGE_URLS = {
+  mancity:      "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Manchester_City_FC_badge.svg/200px-Manchester_City_FC_badge.svg.png",
+  manutd:       "https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Manchester_United_FC_crest.svg/200px-Manchester_United_FC_crest.svg.png",
+  liverpool:    "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Liverpool_FC.svg/200px-Liverpool_FC.svg.png",
+  chelsea:      "https://upload.wikimedia.org/wikipedia/en/thumb/c/cc/Chelsea_FC.svg/200px-Chelsea_FC.svg.png",
+  arsenal:      "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Arsenal_FC.svg/200px-Arsenal_FC.svg.png",
+  barcelona:    "https://upload.wikimedia.org/wikipedia/en/thumb/4/47/FC_Barcelona_%28crest%29.svg/200px-FC_Barcelona_%28crest%29.svg.png",
+  realmadrid:   "https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/200px-Real_Madrid_CF.svg.png",
+  psg:          "https://upload.wikimedia.org/wikipedia/en/thumb/a/a7/Paris_Saint-Germain_F.C..svg/200px-Paris_Saint-Germain_F.C..svg.png",
+  juventus:     "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Juventus_FC_2017_icon_%28black%29.svg/200px-Juventus_FC_2017_icon_%28black%29.svg.png",
+  bayernmunich: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/200px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png",
+};
 
 async function loadBadges() {
-  const promises = Object.entries(TEAM_IDS).map(async ([key, id]) => {
-    try {
-      const r = await fetch(`https://www.thesportsdb.com/api/v1/json/123/lookupteam.php?id=${id}`);
-      const d = await r.json();
-      const t = d.teams?.[0];
-      const url = t?.strTeamBadge || t?.strBadge || '';
-      if (url) BADGE_URLS[key] = url + '/medium';
-    } catch {}
-  });
-  await Promise.all(promises);
+  // Badges already hardcoded above — nothing to load
+  return;
 }
 
 const PLAYER_URLS = {
