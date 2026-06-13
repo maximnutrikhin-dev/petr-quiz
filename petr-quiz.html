@@ -1113,20 +1113,31 @@ function renderQuestion() {
   const card = document.getElementById('question-card');
   card.innerHTML = `
     <div class="q-world-label">${world.emoji} ${world.nameRu} · ${world.nameEn}</div>
-    ${q.image ? `<div class="q-image-wrap"><img src="${q.image}" alt="question image" onerror="this.style.display='none'"></div>` : ''}
+    ${q.image ? `<div class="q-image-wrap" id="q-img-wrap"><img id="q-img" src="${q.image}" alt="question image"></div>` : ''}
     <div class="q-text-en">${q.en}</div>
     <div class="q-text-ru">${q.ru}</div>
   `;
 
-  // answers
+  // answers — use data-correct attribute, not onclick, to avoid CSP eval block
   const answers = shuffle([...q.answers]);
   const grid = document.getElementById('answers-grid');
-  grid.innerHTML = answers.map((a, i) => `
-    <button class="answer-btn" onclick="handleAnswer(this, ${a.correct})">
+  grid.innerHTML = answers.map(a => `
+    <button class="answer-btn" data-correct="${a.correct}">
       <div>${a.en}</div>
       <div class="ans-ru">${a.ru}</div>
     </button>
   `).join('');
+
+  grid.querySelectorAll('.answer-btn').forEach(btn => {
+    btn.addEventListener('click', () => handleAnswer(btn));
+  });
+
+  // hide broken images via JS (no inline onerror — CSP safe)
+  const qImg = document.getElementById('q-img');
+  if (qImg) qImg.addEventListener('error', () => {
+    const wrap = document.getElementById('q-img-wrap');
+    if (wrap) wrap.style.display = 'none';
+  });
 
   // hide feedback + next
   document.getElementById('feedback-bar').className = 'feedback-bar';
@@ -1134,16 +1145,16 @@ function renderQuestion() {
   document.getElementById('next-btn').style.display = 'none';
 }
 
-function handleAnswer(btn, correct) {
+function handleAnswer(btn) {
   if (answered) return;
   answered = true;
+  const correct = btn.dataset.correct === 'true';
   const q = questions[qIndex];
 
-  // mark buttons
+  // mark all buttons
   document.querySelectorAll('.answer-btn').forEach(b => {
     b.disabled = true;
-    const isCorrect = b.onclick.toString().includes('true');
-    if (isCorrect) b.classList.add('correct');
+    if (b.dataset.correct === 'true') b.classList.add('correct');
   });
   if (!correct) btn.classList.add('wrong');
 
